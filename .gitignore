@@ -4,6 +4,11 @@ node_modules/
 # Build
 dist/
 
+# Cache e build temporanee
+.cache/
+.parcel-cache/
+*.tmp
+
 # Variabili ambiente
 .env
 
@@ -15,6 +20,9 @@ dist/
 
 # File di log
 *.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# File personali
+# File personali/locali
 *.local
