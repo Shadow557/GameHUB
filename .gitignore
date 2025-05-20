@@ -1,4 +1,17 @@
+# Dipendenze
 node_modules/
+
+# Build
 dist/
+
+# Variabili ambiente
 .env
+
+# File di sistema
 .DS_Store
+
+# Configurazioni locali di VS Code
+.vscode/
+
+# File di log
+*.log*
