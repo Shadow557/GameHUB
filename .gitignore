@@ -26,3 +26,9 @@ yarn-error.log*
 
 # File personali/locali
 *.local
+
+# Estensione di Visual Studio Code
+.vscode-test/
+
+# Estentsioni di Visual Studio Code
+.prettier/
