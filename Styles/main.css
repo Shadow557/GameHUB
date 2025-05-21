@@ -1,0 +1,80 @@
+/* --- Html base parts --- */
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #aaa;
+	font-family: cursive;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+	min-height: 100vh;
+}
+
+/* --- GameHUB base parts --- */
+
+#head {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+	background-color: #fff;
+	height: 15%;
+}
+
+#body {
+	background-color: #777;
+	height: 70%;
+}
+
+#tail {
+	background-color: #fff;
+	height: 15%;
+}
+
+/* --- base HTML elements --- */
+h1 {
+	margin: 0;
+	font-size: 3.5em;
+	background: linear-gradient(to top, red, black);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
+
+h2 {
+	margin: 0;
+	background: linear-gradient(to top, black, red);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
+
+/* --- GameHUB head parts --- */
+
+#logo,
+#achievements,
+#titleZone,
+#settings,
+#accountLogo {
+	padding: 1vh;
+
+	border-radius: 3vh;
+}
+#titleZone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
