@@ -58,9 +58,12 @@ img {
 }
 
 #body {
+	display: flex;
+	flex-direction: row;
 	background-color: #777;
 	padding: 1vh;
-	height: 70%;
+	height: 130%;
+	z-index: 0;
 }
 
 #footer {
@@ -68,7 +71,7 @@ img {
 	height: 15%;
 }
 
-/* --- GameHUB head parts --- */
+/* --- GameHUB header parts --- */
 
 #titleZone {
 	display: flex;
@@ -98,9 +101,44 @@ img {
 	border-radius: 50%;
 }
 
+#accDisplay {
+	background: #000000;
+	background: radial-gradient(
+		circle,
+		rgba(0, 0, 0, 1) 60%,
+		rgba(100, 0, 0, 1) 100%
+	);
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	align-items: center;
+	background-color: #fff;
+	height: 100%;
+	flex: 1;
+}
+#accDisplay #accountLogo {
+	margin: 0 auto;
+	display: block;
+}
+
 /* --- GameHUB body parts --- */
 
 #gameZone {
 	background-color: #000;
 	height: 100%;
+	flex: 1;
+	z-index: 1;
+}
+
+.ad {
+	background-color: #f00;
+	width: 10%;
+	z-index: 1;
+}
+
+/* --- GameHUB footer parts --- */
+
+/* --- Variables --- */
+.hidden {
+	display: none;
 }
