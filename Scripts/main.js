@@ -1,8 +1,5 @@
-window.addEventListener("DOMContentLoaded", () => {
-	// console.log("La pagina ha finito di caricare");
-
-	init();
-});
+import * as model from "./model.js";
+import displayACC from "./displayAcc.js";
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
@@ -15,4 +12,13 @@ function getCookie(name) {
 // const user = getCookie('username');
 // console.log(user);
 
-(function init() {});
+function controlDisplayACC() {
+	const userData = model.data.userData;
+
+	displayACC.render(userData, true);
+}
+
+// BUG Non funziona
+(function init() {
+	displayACC.addHandlerRender(controlDisplayACC());
+});

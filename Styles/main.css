@@ -140,5 +140,5 @@ img {
 
 /* --- Variables --- */
 .hidden {
-	display: none;
+	display: none !important;
 }

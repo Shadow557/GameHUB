@@ -1,20 +1,23 @@
 export const data = {
-	// User data
-	userData: {
-		username: "Guest",
-		password: null,
-		email: null,
-		firstLogin: "2023-10-01T12:00:00Z",
-		lastLogin: "2023-10-01T12:00:00Z",
-		lastGame: null,
-		lastGameData: null,
-		totalTime: 0,
-		achievements: 0,
-		wins: 0,
-		losses: 0,
-		games: 0,
-	},
+	// Tutti i dati dell'account utente
+	// Inizializzati con valori di default per un utente non registrato
+	userData: [
+		{ username: "Guest" },
+		{ password: null },
+		{ email: null },
+		{ firstLogin: "2023-10-01T12:00:00Z" },
+		{ lastLogin: "2023-10-01T12:00:00Z" },
+		{ lastGame: null },
+		{ lastGameData: null },
+		{ totalTime: 0 },
+		{ achievements: 0 },
+		{ wins: 0 },
+		{ losses: 0 },
+		{ games: 0 },
+	],
 
+	// Dati del sito web
+	// NON possono essere modificati dall'utente!!!
 	website: {
 		gameName: "GameHUB",
 		gameDescription: "A game hub for all your gaming needs.",
@@ -23,6 +26,8 @@ export const data = {
 		gameLogoAltText: "GameHUB Logo",
 	},
 
+	// Impostazioni del sito web
+	// Possono essere modificate dall'utente
 	settings: {
 		theme: "light",
 		titleColor: ["#f00", "#000"],
@@ -30,6 +35,7 @@ export const data = {
 		backgroundColor: ["#fff", "#777"],
 	},
 
-	// Game data
+	// Dati dei giochi
+	// Inizializzati con un array vuoto
 	games: [],
 };
