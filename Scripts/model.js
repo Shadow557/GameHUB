@@ -1,20 +1,20 @@
 export const data = {
 	// Tutti i dati dell'account utente
 	// Inizializzati con valori di default per un utente non registrato
-	userData: [
-		{ username: "Guest" },
-		{ password: null },
-		{ email: null },
-		{ firstLogin: "2023-10-01T12:00:00Z" },
-		{ lastLogin: "2023-10-01T12:00:00Z" },
-		{ lastGame: null },
-		{ lastGameData: null },
-		{ totalTime: 0 },
-		{ achievements: 0 },
-		{ wins: 0 },
-		{ losses: 0 },
-		{ games: 0 },
-	],
+	userData: {
+		username: "Guest",
+		password: null,
+		email: null,
+		firstLogin: "2023-10-01,12:00",
+		lastLogin: "2023-10-01,12:00",
+		lastGame: null,
+		lastGameData: null,
+		totalTime: 0,
+		achievements: 0,
+		wins: 0,
+		losses: 0,
+		games: 0,
+	},
 
 	// Dati del sito web
 	// NON possono essere modificati dall'utente!!!

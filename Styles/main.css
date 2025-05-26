@@ -38,6 +38,12 @@ h2 {
 	background-clip: text;
 	color: transparent;
 }
+#accDisplay h1,
+h2 {
+	background: linear-gradient(to top, black, white);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
 
 img {
 	max-width: 100%;
@@ -102,7 +108,7 @@ img {
 }
 
 #accDisplay {
-	background: #000000;
+	background: #000;
 	background: radial-gradient(
 		circle,
 		rgba(0, 0, 0, 1) 60%,
@@ -115,12 +121,12 @@ img {
 	background-color: #fff;
 	height: 100%;
 	flex: 1;
+	overflow: auto;
 }
 #accDisplay #accountLogo {
 	margin: 0 auto;
 	display: block;
 }
-
 /* --- GameHUB body parts --- */
 
 #gameZone {

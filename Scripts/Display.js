@@ -9,7 +9,7 @@ export default class Display {
 	 * @returns {void}
 	 */
 	render(data, render = true) {
-		console.log(data);
+		// console.log(data.username);
 		if (!data || (Array.isArray(data) && data.length === 0))
 			return this.renderError();
 
@@ -79,5 +79,9 @@ export default class Display {
 
 		this._parentElement.innerHTML = "";
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
+	}
+
+	_clear() {
+		this._parentElement.innerHTML = "";
 	}
 }

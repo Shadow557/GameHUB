@@ -20,5 +20,5 @@ function controlDisplayACC() {
 
 // BUG Non funziona
 (function init() {
-	displayACC.addHandlerRender(controlDisplayACC());
-});
+	displayACC.addHandlerRender(controlDisplayACC);
+})();
