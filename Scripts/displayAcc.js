@@ -27,7 +27,7 @@ class displayACC extends Display {
 					<h2>Total losses: ${this._data.losses}</h2>
 					<h2>Games played: ${this._data.games}</h2>
 					<h2>W/L rate: ${(this._data.wins * this._data.losses) / 100}</h2>
-					<button id="exit">Exit AccountSettings</button>
+					<button id="exit">Exit Account Settings</button>
 				</div>`;
 	}
 
@@ -38,10 +38,27 @@ class displayACC extends Display {
 	 * @returns {void}
 	 */
 	addHandlerRender(handler) {
-		this._targetElement.addEventListener("click", function (e) {
+		this._targetElement.addEventListener("click", (e) => {
 			e.preventDefault();
 			handler();
+			this._exitHandler();
 		});
+	}
+
+	/**
+	 * @author Gabriele Papa Benigno
+	 * @description Gestisce l'evento di uscita dalla schermata dell'account.
+	 * Rimuove la classe "hidden" dal parentElement e svuota il suo contenuto.
+	 * @returns {void}
+	 */
+	_exitHandler() {
+		this._parentElement
+			.querySelector("#exit")
+			.addEventListener("click", (e) => {
+				e.preventDefault();
+				this._parentElement.classList.add("hidden");
+				this._parentElement.innerHTML = "";
+			});
 	}
 }
 

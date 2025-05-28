@@ -20,6 +20,6 @@
 	},
 	"homepage": "https://github.com/Shadow557/GameHUB#readme",
 	"devDependencies": {
-		"parcel": "^2.15.1"
+		"parcel": "^2.15.2"
 	}
 }

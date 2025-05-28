@@ -25,6 +25,7 @@ h1 {
 	font-size: 3.5em;
 	background: linear-gradient(to top, red, black);
 	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
@@ -42,6 +43,7 @@ h2 {
 h2 {
 	background: linear-gradient(to top, black, white);
 	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 

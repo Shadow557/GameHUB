@@ -22,6 +22,10 @@ export default class Display {
 
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
+
+		// alert(this._parentElement.classList.contains("hidden"));
+
+		this._parentElement.classList.toggle("hidden");
 	}
 
 	/**
