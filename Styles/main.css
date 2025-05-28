@@ -20,7 +20,7 @@ body {
 }
 
 /* --- base HTML elements --- */
-h1 {
+#header h1 {
 	margin: 0;
 	font-size: 3.5em;
 	background: linear-gradient(to top, red, black);
@@ -39,8 +39,9 @@ h2 {
 	background-clip: text;
 	color: transparent;
 }
-#accDisplay h1,
-h2 {
+#display h1,
+#display h2 {
+	margin: 0.5em;
 	background: linear-gradient(to top, black, white);
 	-webkit-background-clip: text;
 	background-clip: text;
@@ -109,7 +110,7 @@ img {
 	border-radius: 50%;
 }
 
-#accDisplay {
+#display {
 	background: #000;
 	background: radial-gradient(
 		circle,
@@ -125,7 +126,7 @@ img {
 	flex: 1;
 	overflow: auto;
 }
-#accDisplay #accountLogo {
+#display #accountLogo {
 	margin: 0 auto;
 	display: block;
 }
@@ -146,7 +147,16 @@ img {
 
 /* --- GameHUB footer parts --- */
 
-/* --- Variables --- */
+/* --- Custom --- */
 .hidden {
 	display: none !important;
+}
+
+.coloredBox {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	vertical-align: right;
+	margin-left: 0.5em;
+	border: 1px solid #aaa;
 }

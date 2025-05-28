@@ -20,7 +20,7 @@ export default class Display {
 
 		if (!render) return markup;
 
-		this._clear();
+		// this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
 
 		// alert(this._parentElement.classList.contains("hidden"));

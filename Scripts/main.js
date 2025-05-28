@@ -1,5 +1,6 @@
 import * as model from "./model.js";
-import displayACC from "./displayAcc.js";
+import displayACC from "./mainDisplays/displayAcc.js";
+import displaySettings from "./mainDisplays/displaySettings.js";
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
@@ -12,15 +13,18 @@ function getCookie(name) {
 // const user = getCookie('username');
 // console.log(user);
 
-function controlDisplayACC() {
+function controlDisplayAcc() {
 	const userData = model.data.userData;
 	displayACC.render(userData, true);
 }
 
-function exitAccountSettings() {
-	const parentElement = displayACC._parentElement;
-	parentElement.classList.add("hidden");
-	parentElement.innerHTML = "";
+function editAccountInfo() {}
+
+function saveAccountInfo() {}
+
+function controlDisplaySettings() {
+	const userSettings = model.data.settings;
+	displaySettings.render(userSettings, true);
 }
 
 /**
@@ -29,5 +33,10 @@ function exitAccountSettings() {
  * @returns {void}
  */
 (function init() {
-	displayACC.addHandlerRender(controlDisplayACC);
+	displayACC.addHandlerRender(
+		controlDisplayAcc,
+		saveAccountInfo,
+		editAccountInfo
+	);
+	displaySettings.addHandlerRender(controlDisplaySettings);
 })();
