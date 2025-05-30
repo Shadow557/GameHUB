@@ -17,9 +17,7 @@ class displayACC extends Display {
 					<h2>Name: ${this._data.username}</h2>
 					<h2>Password: ${this._data.password}</h2>
 					<h2>Email: ${this._data.email ?? "none"}</h2>
-                    <h2>First login: ${this._data.firstLogin
-											.split(",")
-											.join(" ")}</h2>
+                    <h2>First login: ${this._data.firstLogin}</h2>
 					<h2>Last game played: ${this._data.lastGame}</h2>
 					<h2>Time spent in total: ${this._data.totalTime}</h2>
 					<h2>Achievements achieved: ${this._data.achievements}</h2>
@@ -29,7 +27,7 @@ class displayACC extends Display {
 					<h2>W/L rate: ${(this._data.wins * this._data.losses) / 100}</h2>
 					<div id="accButtons">
 						<button id="editAcc">Edit Account Info</button>
-                    	<button id="saveAcc">Save Account Info</button>
+                    	<button id="exitAcc">Exit Account Info</button>
 					</div>
 				</div>`;
 	}
@@ -57,7 +55,7 @@ class displayACC extends Display {
 					<button id="saveAcc">Save Account Info</button>
 					</form>
 					
-					<button id="exitAcc">Exit without saving</button>
+					<button id="exitAcc">Exit Account Info</button>
 				</div>`;
 	}
 
@@ -67,46 +65,15 @@ class displayACC extends Display {
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
 	 */
-	addHandlerRender(handler, saveHandler, editHandler) {
+	addHandlerRender(handler) {
 		this._targetElement.addEventListener("click", (e) => {
 			const target = e.target.closest("#accountLogo");
 			if (!target) return;
 
 			e.preventDefault();
 			handler();
-			this._addHandlers(saveHandler, editHandler);
+			console.log(this);
 		});
-	}
-
-	_editHandler(handler) {
-		console.log(`x`);
-		handler();
-	}
-
-	/**
-	 * @author Gabriele Papa Benigno
-	 * @description Gestisce l'evento di uscita dalla schermata dell'account.
-	 * Rimuove la classe "hidden" dal parentElement e svuota il suo contenuto.
-	 * @returns {void}
-	 */
-	_saveHandler(handler) {
-		handler();
-		this._parentElement.classList.add("hidden");
-		this._parentElement.innerHTML = "";
-	}
-
-	_addHandlers(saveHandler, editHandler) {
-		this._parentElement
-			.querySelector("#saveAcc")
-			.addEventListener("click", () => {
-				this._saveHandler(saveHandler);
-			});
-
-		this._parentElement
-			.querySelector("#editAcc")
-			.addEventListener("click", () => {
-				this._editHandler(editHandler);
-			});
 	}
 }
 
