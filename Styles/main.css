@@ -1,3 +1,14 @@
+/* Non è possibile inserire direttamente valori calcolati da JS in un file CSS statico.
+	Tuttavia, puoi usare le CSS custom properties (variabili) e modificarle via JS.
+	Esempio:
+	1. Definisci una variabile CSS nel tuo CSS, ad esempio:
+		:root { --main-color: #f00; }
+	2. Nel tuo JS aggiorna la variabile:
+		document.documentElement.style.setProperty('--main-color', valoreCalcolato);
+	3. Usa la variabile nel CSS:
+		background-color: var(--main-color);
+*/
+
 /* --- Html base parts --- */
 
 html,
@@ -23,7 +34,8 @@ body {
 #header h1 {
 	margin: 0;
 	font-size: 3.5em;
-	background: linear-gradient(to top, red, black);
+	/* background: linear-gradient(to top, red, black); */
+	background: var(--sfumaturaTitolo);
 	-webkit-background-clip: text;
 	background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -33,7 +45,8 @@ body {
 
 h2 {
 	margin: 0;
-	background: linear-gradient(to top, black, red);
+	/* background: linear-gradient(to top, black, red); */
+	background: var(--sfumaturaSottotitolo);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -71,7 +84,7 @@ img {
 	flex-direction: row;
 	background-color: #777;
 	padding: 1vh;
-	height: 130%;
+	height: 100%;
 	z-index: 0;
 }
 
@@ -112,11 +125,12 @@ img {
 
 #display {
 	background: #000;
-	background: radial-gradient(
+	/* background: radial-gradient(
 		circle,
 		rgba(0, 0, 0, 1) 60%,
 		rgba(100, 0, 0, 1) 100%
-	);
+	); */
+	background: var(--sfumaturaSfondo);
 	display: flex;
 	flex-direction: column;
 	text-align: center;
@@ -159,4 +173,15 @@ img {
 	vertical-align: right;
 	margin-left: 0.5em;
 	border: 1px solid #aaa;
+}
+
+/* --- Custom Variables--- */
+:root {
+	--sfumaturaTitolo: linear-gradient(to top, red, black);
+	--sfumaturaSottotitolo: linear-gradient(to top, black, red);
+	--sfumaturaSfondo: radial-gradient(
+		circle,
+		rgba(0, 0, 0, 1) 60%,
+		rgba(100, 0, 0, 1) 100%
+	);
 }

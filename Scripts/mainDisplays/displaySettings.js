@@ -32,8 +32,34 @@ class DisplaySettings extends Display {
                     </h2>
                     <br />
 
+                    <button id="exitSettings">Exit Settings</button>
                     <button id="editSettings">Edit Settings</button>
-                    <button id="saveSettings">Save Settings</button>
+				</div>`;
+	}
+
+	_generateEditableMarkup() {
+		return `<div id="settingsDisplayContent">
+					<form method="post" id="editSettingsForm">
+
+					<h2><label for="titleColor">Title color: </label></h2>
+					<input type="color" id="titleColor1" name="titleColor1" value="${this._data.titleColor[0]}">
+					<input type="color" id="titleColor2" name="titleColor2" value="${this._data.titleColor[1]}">
+					<br /><br />
+
+					<h2><label for="subtitleColor">Subtitle color: </label></h2>
+					<input type="color" id="subtitleColor1" name="subtitleColor1" value="${this._data.subtitleColor[0]}">
+					<input type="color" id="subtitleColor2" name="subtitleColor2" value="${this._data.subtitleColor[1]}">
+					<br /><br />
+
+					<h2><label for="backgroundColor">BackgroundColor: </label></h2>
+					<input type="color" id="backgroundColor1" name="backgroundColor1" value="${this._data.backgroundColor[0]}">
+					<input type="color" id="backgroundColor2" name="backgroundColor2" value="${this._data.backgroundColor[1]}">
+					<br /><br />
+
+					<button id="saveSettings" type="submit">Save settings</button>
+					</form>
+					
+					<button id="exitSettings">Exit settings menu</button>
 				</div>`;
 	}
 
@@ -50,7 +76,6 @@ class DisplaySettings extends Display {
 
 			e.preventDefault();
 			handler();
-			this._exitHandler();
 		});
 	}
 
@@ -60,14 +85,25 @@ class DisplaySettings extends Display {
 	 * Rimuove la classe "hidden" dal parentElement e svuota il suo contenuto.
 	 * @returns {void}
 	 */
-	_exitHandler() {
-		this._parentElement
-			.querySelector("#saveSettings")
-			.addEventListener("click", (e) => {
-				e.preventDefault();
-				this._parentElement.classList.add("hidden");
-				this._parentElement.innerHTML = "";
-			});
+	changeColors(updatedData) {
+		this._data.titleColor = updatedData.titleColor;
+		this._data.subtitleColor = updatedData.subtitleColor;
+		this._data.backgroundColor = updatedData.backgroundColor;
+
+		document.documentElement.style.setProperty(
+			"--sfumaturaTitolo",
+			`linear-gradient(to top, ${this._data.titleColor[0]}, ${this._data.titleColor[1]})`
+		);
+		document.documentElement.style.setProperty(
+			"--sfumaturaSottotitolo",
+			`linear-gradient(to top, ${this._data.subtitleColor[0]}, ${this._data.subtitleColor[1]})`
+		);
+		document.querySelector("#header").style.backgroundColor =
+			this._data.backgroundColor[0];
+		document.querySelector("#footer").style.backgroundColor =
+			this._data.backgroundColor[0];
+		document.querySelector("#body").style.backgroundColor =
+			this._data.backgroundColor[1];
 	}
 }
 

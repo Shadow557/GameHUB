@@ -30,9 +30,9 @@ export const data = {
 	// Possono essere modificate dall'utente
 	settings: {
 		theme: "light",
-		titleColor: ["#f00", "#000"],
-		subtitleColor: ["#000", "#f00"],
-		backgroundColor: ["#fff", "#777"],
+		titleColor: ["#ff0000", "#000000"],
+		subtitleColor: ["#000000", "#ff0000"],
+		backgroundColor: ["#ffffff", "#777777"],
 	},
 
 	// Dati dei giochi

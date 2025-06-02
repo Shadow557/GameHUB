@@ -23,22 +23,8 @@ function controlDisplayAcc() {
 
 		if (e.target.id === "editAcc") {
 			editAccountInfo();
-			/*
-
-			document.querySelector("#editAccForm").addEventListener("submit", (e) => {
-				e.preventDefault();
-				const formData = new FormData(e.target);
-				const updatedData = {
-					username: formData.get("username"),
-					password: formData.get("password"),
-					email: formData.get("email"),
-				};
-				model.data.userData = { ...model.data.userData, ...updatedData };
-				displayACC.update(model.data.userData);
-			});
-		} else if (e.target.id === "exitAcc") {
-			exitAccountInfo();
-			displayACC.render(model.data.userData, false);*/
+		} else {
+			exitDisplay();
 		}
 	});
 }
@@ -46,9 +32,29 @@ function controlDisplayAcc() {
 function editAccountInfo() {
 	console.log(`editAccountInfo() called`);
 	displayACC.renderFromMarkup(displayACC._generateEditableMarkup(), false);
+
+	document.querySelector("#exitAcc").addEventListener("click", (e) => {
+		e.preventDefault();
+		exitDisplay();
+	});
+
+	document.querySelector("#editAccForm").addEventListener("submit", (e) => {
+		e.preventDefault();
+
+		const formData = new FormData(e.target);
+		const updatedData = {
+			username: formData.get("username"),
+			password: formData.get("password"),
+			email: formData.get("email"),
+		};
+
+		model.data.userData = { ...model.data.userData, ...updatedData };
+		displayACC.update(model.data.userData);
+		exitDisplay();
+	});
 }
 
-function exitAccountInfo() {
+function exitDisplay() {
 	console.log(`exitAccountInfo() called`);
 	displayACC._parentElement.classList.add("hidden");
 }
@@ -56,6 +62,54 @@ function exitAccountInfo() {
 function controlDisplaySettings() {
 	const userSettings = model.data.settings;
 	displaySettings.render(userSettings, true);
+
+	document.querySelector("#editSettings").addEventListener("click", (e) => {
+		e.preventDefault();
+
+		displaySettings.renderFromMarkup(
+			displaySettings._generateEditableMarkup(),
+			false
+		);
+
+		document
+			.querySelector("#editSettingsForm")
+			.addEventListener("submit", (e) => {
+				e.preventDefault();
+
+				const formData = new FormData(e.target);
+
+				const updatedData = {
+					titleColor: [
+						formData.get("titleColor1"),
+						formData.get("titleColor2"),
+					],
+					subtitleColor: [
+						formData.get("subtitleColor1"),
+						formData.get("subtitleColor2"),
+					],
+					backgroundColor: [
+						formData.get("backgroundColor1"),
+						formData.get("backgroundColor2"),
+					],
+				};
+
+				model.data.settings = { ...model.data.settings, ...updatedData };
+				displaySettings.changeColors(updatedData);
+
+				displaySettings.update(model.data.settings);
+				exitDisplay();
+			});
+
+		document.querySelector("#exitSettings").addEventListener("click", (e) => {
+			e.preventDefault();
+			exitDisplay();
+		});
+	});
+
+	document.querySelector("#exitSettings").addEventListener("click", (e) => {
+		e.preventDefault();
+		exitDisplay();
+	});
 }
 
 /**
