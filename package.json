@@ -4,8 +4,8 @@
 	"description": "Just a simple website with games in it",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "parcel docs/index.html",
-		"build": "parcel build docs/index.html"
+		"start": "parcel index.html",
+		"build": "parcel build index.html"
 	},
 	"repository": {
 		"type": "git",
