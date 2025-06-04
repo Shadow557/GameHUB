@@ -1,5 +1,12 @@
 import Display from "./Display";
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Classe per visualizzare le impostazioni della pagina principale.
+ * Estende la classe Display per gestire la visualizzazione e l'editing delle impostazioni utente.
+ * @extends Display
+ * @returns {DisplaySettings} - Un'istanza della classe DisplaySettings.
+ */
 class DisplaySettings extends Display {
 	_parentElement = document.querySelector("#display");
 	_targetElement = document.querySelector("#header");
@@ -37,6 +44,11 @@ class DisplaySettings extends Display {
 				</div>`;
 	}
 
+	/**
+	 * @author Gabriele Papa Benigno
+	 * @description Crea il markup per la modifica delle impostazioni dell'utente.
+	 * @returns {String} - Il markup HTML generato per la modifica delle impostazioni.
+	 */
 	_generateEditableMarkup() {
 		return `<div id="settingsDisplayContent">
 					<form method="post" id="editSettingsForm">

@@ -19,11 +19,19 @@ export const data = {
 	// Dati del sito web
 	// NON possono essere modificati dall'utente!!!
 	website: {
-		gameName: "GameHUB",
-		gameDescription: "A game hub for all your gaming needs.",
-		gameVersion: "1.0.0",
-		gameLogoPath: "../Pictures/Guest.png",
-		gameLogoAltText: "GameHUB Logo",
+		name: "GameHUB",
+		description: "A game hub for all your gaming needs.",
+		version: "1.0.0",
+	},
+
+	// Dati riguardanti ME
+	me: {
+		myName: "Shadow Shining",
+		myEmail: "craftiaentity@gmail.com",
+		myWebsite: "(maybe in the future)",
+		myDescription: "A dude who doesn't know what to do in life.",
+		myAvatarPath: "../Pictures/ShadowShining.png",
+		myGitHub: "https://github.com/Shadow557",
 	},
 
 	// Impostazioni del sito web

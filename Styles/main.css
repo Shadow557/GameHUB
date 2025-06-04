@@ -1,14 +1,3 @@
-/* Non è possibile inserire direttamente valori calcolati da JS in un file CSS statico.
-	Tuttavia, puoi usare le CSS custom properties (variabili) e modificarle via JS.
-	Esempio:
-	1. Definisci una variabile CSS nel tuo CSS, ad esempio:
-		:root { --main-color: #f00; }
-	2. Nel tuo JS aggiorna la variabile:
-		document.documentElement.style.setProperty('--main-color', valoreCalcolato);
-	3. Usa la variabile nel CSS:
-		background-color: var(--main-color);
-*/
-
 /* --- Html base parts --- */
 
 html,
@@ -41,6 +30,7 @@ body {
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
+	font-size: 7.5vh;
 }
 
 h2 {
@@ -51,6 +41,7 @@ h2 {
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 	color: transparent;
+	font-size: 3vh;
 }
 #display h1,
 #display h2 {
@@ -101,6 +92,7 @@ img {
 	align-items: center;
 	padding: 1vh;
 	border-radius: 3vh;
+	flex-shrink: 1;
 }
 
 #logo,

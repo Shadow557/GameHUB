@@ -1,5 +1,12 @@
 import Display from "./Display";
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Classe per visualizzare i dati dell'account utente.
+ * Estende la classe Display per gestire la visualizzazione e l'editing delle informazioni dell'account.
+ * @extends Display
+ * @returns {displayACC} - Un'istanza della classe displayACC.
+ */
 class displayACC extends Display {
 	_parentElement = document.querySelector("#display");
 	_targetElement = document.querySelector("#header");
@@ -32,6 +39,11 @@ class displayACC extends Display {
 				</div>`;
 	}
 
+	/**
+	 * @author Gabriele Papa Benigno
+	 * @description Crea il markup per la modifica delle informazioni dell'account.
+	 * @returns {String} - Il markup HTML generato per la modifica delle informazioni dell'account.
+	 */
 	_generateEditableMarkup() {
 		return `<div id="accDisplayContent">
 					<form method="post" id="editAccForm">
@@ -72,7 +84,7 @@ class displayACC extends Display {
 
 			e.preventDefault();
 			handler();
-			console.log(this);
+			// console.log(this);
 		});
 	}
 }

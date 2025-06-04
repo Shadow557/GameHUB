@@ -1,3 +1,8 @@
+/**
+ * @author Gabriele Papa Benigno
+ * @description Classe base per la visualizzazione dei dati.
+ * @returns {Display} - Un'istanza della classe Display.
+ */
 export default class Display {
 	_data;
 
@@ -9,39 +14,52 @@ export default class Display {
 	 * @returns {void}
 	 */
 	render(data, render = true) {
-		// console.log(data.username);
+		// console.log(data.username); // DEBUG
+		// Controlla se i dati sono validi
 		if (!data || (Array.isArray(data) && data.length === 0))
 			return this.renderError();
 
-		// console.log(data);
-
+		// console.log(data); // DEBUG
+		// Aggiorna i dati della schermata e genera il markup
 		this._data = data;
 		const markup = this._generateMarkup();
 
+		// Se render è false, restituisce il markup generato senza modificarlo nella schermata
 		if (!render) return markup;
 
+		// Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
-
-		// alert(this._parentElement.classList.contains("hidden"));
-
-		this._parentElement.classList.toggle("hidden");
-	}
-
-	renderFromMarkup(markup, render = true) {
-		if (!markup || markup.length === 0) return this.renderError();
-
-		this._clear();
-		this._parentElement.insertAdjacentHTML("afterbegin", markup);
-
-		if (!render) return;
 
 		this._parentElement.classList.toggle("hidden");
 	}
 
 	/**
 	 * @author Gabriele Papa Benigno
-	 * @description:
+	 * @description Crea il markup HTML da visualizzare nella schermata senza l'uso di dati.
+	 * @param {String} markup - Il markup HTML da inserire nel parentElement.
+	 * @param {Boolean0} render - Se true, renderizza il markup nella schermata, altrimenti termina senza fare nulla.
+	 * @returns {void}
+	 */
+	renderFromMarkup(markup, render = true) {
+		// Controlla se il markup è valido
+		// Se il markup è vuoto o non valido, mostra un messaggio di errore
+		if (!markup || markup.length === 0) return this.renderError();
+
+		// Svuota il contenuto del parentElement e inserisce il nuovo markup
+		this._clear();
+		this._parentElement.insertAdjacentHTML("afterbegin", markup);
+
+		// Se render è false, termina senza fare nulla
+		if (!render) return;
+
+		// Altrimenti, mostra il parentElement
+		this._parentElement.classList.toggle("hidden");
+	}
+
+	/**
+	 * @author Gabriele Papa Benigno
+	 * @description: Aggiorna i dati visualizzati nella schermata:
 	 * 1) I dati presenti nella schermata vengono aggiornati.
 	 * 2) Viene creato un nuovo Markup.
 	 * 3) Viene generato un nuovo DOM virtuale.
@@ -51,13 +69,25 @@ export default class Display {
 	 * @returns {void}
 	 */
 	update(data) {
+		// Controlla se i dati sono validi
+		// Se i dati sono vuoti o non validi, mostra un messaggio di errore
+		if (!data || (Array.isArray(data) && data.length === 0))
+			return this.renderError();
+
+		// aggiorna i dati della schermata e genera il nuovo markup
 		this._data = data;
 		const newMarkup = this._generateMarkup();
 
+		// Crea un nuovo DOM virtuale e raccoglie gli elementi
+		// presenti nel nuovo markup e in quello attuale
 		const newDOM = document.createRange().createContextualFragment(newMarkup);
 		const newElements = Array.from(newDOM.querySelectorAll("*"));
 		const curElements = Array.from(this._parentElement.querySelectorAll("*"));
 
+		// per ogni elemento nel nuovo DOM virtuale,
+		// controlla se è diverso da quello attuale
+		// se è diverso, aggiorna il testo e gli attributi dell'elemento attuale
+		// altrimenti non fa nulla
 		newElements.forEach((newEl, i) => {
 			const curEl = curElements[i];
 			if (
@@ -84,11 +114,7 @@ export default class Display {
 	renderError(message = this._errorMessage) {
 		const markup = `
       <div class="error">
-        <div>
-          <svg>
-            <use href="${icons}#icon-alert-triangle"></use>
-          </svg>
-        </div>
+        <h2>Error</h2>
         <p>${message}</p>
       </div>`;
 
@@ -96,6 +122,11 @@ export default class Display {
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
 	}
 
+	/**
+	 * @author Gabriele Papa Benigno
+	 * @description Pulisce il contenuto del parentElement.
+	 * @returns {void}
+	 */
 	_clear() {
 		this._parentElement.innerHTML = "";
 	}

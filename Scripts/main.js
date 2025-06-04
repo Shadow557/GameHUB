@@ -1,7 +1,7 @@
 import * as model from "./model.js";
 import displayACC from "./mainDisplays/displayAcc.js";
 import displaySettings from "./mainDisplays/displaySettings.js";
-import Display from "./mainDisplays/Display.js";
+import displayMe from "./mainDisplays/displayMe.js";
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
@@ -14,6 +14,14 @@ function getCookie(name) {
 // const user = getCookie('username');
 // console.log(user);
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Gestisce il rendering della schermata dell'account:
+ * 1. Mostra le informazioni dell'account corrente.
+ * 2. Permette di modificare le informazioni dell'account.
+ * 3. Gestisce l'uscita dalla schermata dell'account e/o il salvataggio delle nuove informazioni.
+ * @returns {void}
+ */
 function controlDisplayAcc() {
 	const userData = model.data.userData;
 	displayACC.render(userData, true);
@@ -29,15 +37,27 @@ function controlDisplayAcc() {
 	});
 }
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Gestisce la modifica delle informazioni dell'account:
+ * 1. Mostra il modulo di modifica delle informazioni dell'account.
+ * 2. Permette di salvare le modifiche.
+ * 3. Gestisce l'uscita dalla schermata di modifica.
+ * @returns {void}
+ */
 function editAccountInfo() {
-	console.log(`editAccountInfo() called`);
+	// console.log(`editAccountInfo() called`); //DEBUG
+	// Mostra il modulo di modifica delle informazioni dell'account
 	displayACC.renderFromMarkup(displayACC._generateEditableMarkup(), false);
 
+	// Aggiunge un gestore di eventi per il pulsante di uscita dalla schermata di modifica
 	document.querySelector("#exitAcc").addEventListener("click", (e) => {
 		e.preventDefault();
 		exitDisplay();
 	});
 
+	// Aggiunge un gestore di eventi per il pulsante di salvataggio delle informazioni dell'account usando il modulo form come selettore
+	// Questo gestore raccoglie i dati dal modulo e li aggiorna nel modello
 	document.querySelector("#editAccForm").addEventListener("submit", (e) => {
 		e.preventDefault();
 
@@ -54,23 +74,41 @@ function editAccountInfo() {
 	});
 }
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Gestisce l'uscita dalla schermata corrente attiva.
+ * @returns {void}
+ */
 function exitDisplay() {
-	console.log(`exitAccountInfo() called`);
+	// console.log(`exitAccountInfo() called`);
 	displayACC._parentElement.classList.add("hidden");
 }
 
+/**
+ * @author Gabriele Papa Benigno
+ * @description Gestisce il rendering della schermata delle impostazioni:
+ * 1. Mostra le impostazioni correnti.
+ * 2. Permette di modificare le impostazioni.
+ * 3. Gestisce l'uscita dalla schermata delle impostazioni.
+ * @returns {void}
+ */
 function controlDisplaySettings() {
 	const userSettings = model.data.settings;
 	displaySettings.render(userSettings, true);
 
+	// Aggiunge un gestore di eventi per il pulsante delle impostazioni
 	document.querySelector("#editSettings").addEventListener("click", (e) => {
 		e.preventDefault();
 
+		// Mostra il modulo di modifica delle impostazioni
 		displaySettings.renderFromMarkup(
 			displaySettings._generateEditableMarkup(),
 			false
 		);
 
+		// Aggiunge un gestore di eventi per il pulsante di salvataggio delle impostazioni
+		// Questo gestore raccoglie i dati dal modulo e li aggiorna nel modello
+		// Poi aggiorna la visualizzazione delle impostazioni e chiude la schermata delle impostazioni
 		document
 			.querySelector("#editSettingsForm")
 			.addEventListener("submit", (e) => {
@@ -100,13 +138,27 @@ function controlDisplaySettings() {
 				exitDisplay();
 			});
 
+		// Aggiunge un gestore di eventi per il pulsante di uscita dalle impostazioni
+		// Questo gestore chiude la schermata delle impostazioni senza applicare le modifiche
 		document.querySelector("#exitSettings").addEventListener("click", (e) => {
 			e.preventDefault();
 			exitDisplay();
 		});
 	});
 
+	// Aggiunge un gestore di eventi per il pulsante di uscita dalle impostazioni
+	// Questo gestore chiude la schermata delle impostazioni senza modificare nulla
 	document.querySelector("#exitSettings").addEventListener("click", (e) => {
+		e.preventDefault();
+		exitDisplay();
+	});
+}
+
+function controlDisplayMe() {
+	const myData = model.data;
+	displayMe.render(myData, true);
+
+	document.querySelector("#exit").addEventListener("click", (e) => {
 		e.preventDefault();
 		exitDisplay();
 	});
@@ -120,4 +172,5 @@ function controlDisplaySettings() {
 (function init() {
 	displayACC.addHandlerRender(controlDisplayAcc);
 	displaySettings.addHandlerRender(controlDisplaySettings);
+	displayMe.addHandlerRender(controlDisplayMe);
 })();
