@@ -1,4 +1,4 @@
-import Display from "./display";
+import Display from "./displayTemp.js";
 
 /**
  * @author Gabriele Papa Benigno
@@ -8,7 +8,7 @@ import Display from "./display";
  * @returns {DisplaySettings} - Un'istanza della classe DisplaySettings.
  */
 class DisplaySettings extends Display {
-	_parentElement = document.querySelector("#display");
+	_parentElement = document.querySelector(".display");
 	_targetElement = document.querySelector("#header");
 	_errorMessage =
 		"No user data found. Please log in to view your account details.";

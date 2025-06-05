@@ -1,7 +1,7 @@
-import Display from "./display";
+import Display from "./displayTemp.js";
 
 class displayMe extends Display {
-	_parentElement = document.querySelector("#display");
+	_parentElement = document.querySelector(".display");
 	_targetElement = document.querySelector("#header");
 	_errorMessage = "My info are not available. Sorry.";
 
