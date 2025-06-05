@@ -1,4 +1,4 @@
-import Display from "./Display";
+import Display from "./display";
 
 class displayMe extends Display {
 	_parentElement = document.querySelector("#display");
