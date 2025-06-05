@@ -169,10 +169,8 @@ function controlDisplayMe() {
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
  * @returns {void}
  */
-document.addEventListener("DOMContentLoader", () => {
-	(function init() {
-		displayACC.addHandlerRender(controlDisplayAcc);
-		displaySettings.addHandlerRender(controlDisplaySettings);
-		displayMe.addHandlerRender(controlDisplayMe);
-	})();
-});
+(function init() {
+	displayACC.addHandlerRender(controlDisplayAcc);
+	displaySettings.addHandlerRender(controlDisplaySettings);
+	displayMe.addHandlerRender(controlDisplayMe);
+})();
