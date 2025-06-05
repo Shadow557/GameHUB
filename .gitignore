@@ -1,0 +1,34 @@
+# Dipendenze
+node_modules/
+
+# Build
+dist/
+
+# Cache e build temporanee
+.cache/
+.parcel-cache/
+*.tmp
+
+# Variabili ambiente
+.env
+
+# File di sistema
+.DS_Store
+
+# Configurazioni locali di VS Code
+.vscode/
+
+# File di log
+*.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# File personali/locali
+*.local
+
+# Estensione di Visual Studio Code
+.vscode-test/
+
+# Estentsioni di Visual Studio Code
+.prettier/
