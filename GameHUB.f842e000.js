@@ -909,16 +909,16 @@ exports.export = function(dest, destName, get) {
 },{}],"fIrGz":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _display = require("./Display");
-var _displayDefault = parcelHelpers.interopDefault(_display);
+var _displayTempJs = require("./displayTemp.js");
+var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
 /**
  * @author Gabriele Papa Benigno
  * @description Classe per visualizzare i dati dell'account utente.
  * Estende la classe Display per gestire la visualizzazione e l'editing delle informazioni dell'account.
  * @extends Display
  * @returns {displayACC} - Un'istanza della classe displayACC.
- */ class displayACC extends (0, _displayDefault.default) {
-    _parentElement = document.querySelector("#display");
+ */ class displayACC extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector(".display");
     _targetElement = document.querySelector("#header");
     _errorMessage = "No user data found. Please log in to view your account details.";
     /**
@@ -988,7 +988,7 @@ var _displayDefault = parcelHelpers.interopDefault(_display);
 }
 exports.default = new displayACC();
 
-},{"./Display":"ghVlH","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"ghVlH":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"4HM4j":[function(require,module,exports,__globalThis) {
 /**
  * @author Gabriele Papa Benigno
  * @description Classe base per la visualizzazione dei dati.
@@ -1095,16 +1095,16 @@ exports.default = Display;
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jLG3B":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _display = require("./Display");
-var _displayDefault = parcelHelpers.interopDefault(_display);
+var _displayTempJs = require("./displayTemp.js");
+var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
 /**
  * @author Gabriele Papa Benigno
  * @description Classe per visualizzare le impostazioni della pagina principale.
  * Estende la classe Display per gestire la visualizzazione e l'editing delle impostazioni utente.
  * @extends Display
  * @returns {DisplaySettings} - Un'istanza della classe DisplaySettings.
- */ class DisplaySettings extends (0, _displayDefault.default) {
-    _parentElement = document.querySelector("#display");
+ */ class DisplaySettings extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector(".display");
     _targetElement = document.querySelector("#header");
     _errorMessage = "No user data found. Please log in to view your account details.";
     4;
@@ -1196,13 +1196,13 @@ var _displayDefault = parcelHelpers.interopDefault(_display);
 }
 exports.default = new DisplaySettings();
 
-},{"./Display":"ghVlH","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jn2qD":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"jn2qD":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _display = require("./Display");
-var _displayDefault = parcelHelpers.interopDefault(_display);
-class displayMe extends (0, _displayDefault.default) {
-    _parentElement = document.querySelector("#display");
+var _displayTempJs = require("./displayTemp.js");
+var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
+class displayMe extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector(".display");
     _targetElement = document.querySelector("#header");
     _errorMessage = "My info are not available. Sorry.";
     /**
@@ -1244,6 +1244,6 @@ class displayMe extends (0, _displayDefault.default) {
 }
 exports.default = new displayMe();
 
-},{"./Display":"ghVlH","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["5DK16","5WjR7"], "5WjR7", "parcelRequire658c", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}]},["5DK16","5WjR7"], "5WjR7", "parcelRequire658c", {})
 
 //# sourceMappingURL=GameHUB.f842e000.js.map
