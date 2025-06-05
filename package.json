@@ -5,7 +5,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "parcel index.html",
-		"build": "parcel build index.html"
+		"build": "parcel build index.html",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"repository": {
 		"type": "git",
@@ -20,6 +22,7 @@
 	},
 	"homepage": "https://github.com/Shadow557/GameHUB#readme",
 	"devDependencies": {
+		"gh-pages": "^6.3.0",
 		"parcel": "^2.15.2"
 	}
 }
