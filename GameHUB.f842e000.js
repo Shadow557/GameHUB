@@ -160,11 +160,11 @@
       });
     }
   }
-})({"5DK16":[function(require,module,exports,__globalThis) {
+})({"g7m11":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 4320;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -811,13 +811,11 @@ function controlDisplayMe() {
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
  * @returns {void}
- */ document.addEventListener("DOMContentLoader", ()=>{
-    (function init() {
-        (0, _displayAccJsDefault.default).addHandlerRender(controlDisplayAcc);
-        (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
-        (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
-    })();
-});
+ */ (function init() {
+    (0, _displayAccJsDefault.default).addHandlerRender(controlDisplayAcc);
+    (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
+    (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
+})();
 
 },{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"361Ju":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -1018,7 +1016,8 @@ class Display {
         // Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
-        this._parentElement.classList.toggle("hidden");
+        console.log(this._parentElement.innerHTML);
+        this._parentElement.classList.remove("hidden");
     }
     /**
 	 * @author Gabriele Papa Benigno
@@ -1036,7 +1035,7 @@ class Display {
         // Se render è false, termina senza fare nulla
         if (!render) return;
         // Altrimenti, mostra il parentElement
-        this._parentElement.classList.toggle("hidden");
+        this._parentElement.classList.remove("hidden");
     }
     /**
 	 * @author Gabriele Papa Benigno
@@ -1246,6 +1245,6 @@ class displayMe extends (0, _displayTempJsDefault.default) {
 }
 exports.default = new displayMe();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}]},["5DK16","5WjR7"], "5WjR7", "parcelRequire658c", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {})
 
 //# sourceMappingURL=GameHUB.f842e000.js.map
