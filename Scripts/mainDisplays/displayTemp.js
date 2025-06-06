@@ -30,8 +30,9 @@ export default class Display {
 		// Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
+		console.log(this._parentElement.innerHTML);
 
-		this._parentElement.classList.toggle("hidden");
+		this._parentElement.classList.remove("hidden");
 	}
 
 	/**
@@ -54,7 +55,7 @@ export default class Display {
 		if (!render) return;
 
 		// Altrimenti, mostra il parentElement
-		this._parentElement.classList.toggle("hidden");
+		this._parentElement.classList.remove("hidden");
 	}
 
 	/**

@@ -4,8 +4,10 @@
 	"description": "Just a simple website with games in it",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "parcel index.html",
-		"build": "parcel build index.html"
+		"start": "parcel index.html --port 4320",
+		"build": "parcel build index.html --dist-dir ./dist --public-url /GameHUB/",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d dist"
 	},
 	"repository": {
 		"type": "git",
