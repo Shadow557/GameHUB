@@ -675,6 +675,8 @@ var _displaySettingsJs = require("./mainDisplays/displaySettings.js");
 var _displaySettingsJsDefault = parcelHelpers.interopDefault(_displaySettingsJs);
 var _displayMeJs = require("./mainDisplays/displayMe.js");
 var _displayMeJsDefault = parcelHelpers.interopDefault(_displayMeJs);
+var _displayMainJs = require("./mainDisplays/displayMain.js");
+var _displayMainJsDefault = parcelHelpers.interopDefault(_displayMainJs);
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -807,6 +809,10 @@ function controlDisplayMe() {
         exitDisplay();
     });
 }
+function controlDisplayMain() {
+    const myData = _modelJs.data;
+    (0, _displayMainJsDefault.default).render(myData, true);
+}
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -815,9 +821,10 @@ function controlDisplayMe() {
     (0, _displayAccJsDefault.default).addHandlerRender(controlDisplayAcc);
     (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
     (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
+    controlDisplayMain();
 })();
 
-},{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"361Ju":[function(require,module,exports,__globalThis) {
+},{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6"}],"361Ju":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "data", ()=>data);
@@ -836,7 +843,8 @@ const data = {
         achievements: 0,
         wins: 0,
         losses: 0,
-        games: 0
+        games: 0,
+        currentPage: 0
     },
     // Dati del sito web
     // NON possono essere modificati dall'utente!!!
@@ -1017,6 +1025,7 @@ class Display {
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
         console.log(this._parentElement.innerHTML);
+        console.log(this._parentElement.innerHTML.classList);
         this._parentElement.classList.remove("hidden");
     }
     /**
@@ -1245,6 +1254,43 @@ class displayMe extends (0, _displayTempJsDefault.default) {
 }
 exports.default = new displayMe();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {})
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"6xHo6":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _displayTempJs = require("./displayTemp.js");
+var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
+class displayMain extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector("#gameZone");
+    _targetElement = document.querySelector("#header");
+    _errorMessage = "My info are not available. Sorry.";
+    /**
+	 * @author Gabriele Papa Benigno
+	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
+	 * @returns {String} - Il markup HTML generato.
+	 */ _generateMarkup() {
+        return `<div id="main">
+                    <div class="btn" id="minigames">Play Minigames</div>
+                    <div class="btn" id="games">Play Games</div>
+                    <div class="btn">temp</div>
+                    <div class="btn">temp</div>
+                </div>`;
+    }
+    /**
+	 * @author Gabriele Papa Benigno
+	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
+	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
+	 * @returns {void}
+	 */ addHandlerRender(handler) {
+        this._targetElement.addEventListener("click", (e)=>{
+            const target = e.target.closest("#logo");
+            if (!target) return;
+            e.preventDefault();
+            handler();
+        });
+    }
+}
+exports.default = new displayMain();
+
+},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {})
 
 //# sourceMappingURL=GameHUB.f842e000.js.map
