@@ -140,9 +140,19 @@ img {
 
 #gameZone {
 	background-color: #000;
+	color: #fff;
 	height: 100%;
 	flex: 1;
 	z-index: 1;
+}
+
+#main {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	/* border: 2px dashed lime; */
+	height: 100%;
 }
 
 .ad {
@@ -165,6 +175,22 @@ img {
 	vertical-align: right;
 	margin-left: 0.5em;
 	border: 1px solid #aaa;
+}
+
+.btn {
+	color: #000;
+	padding: 1em;
+	background: #ff0;
+	box-shadow: 0em 0em 0.5em 0.5em #ff0;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: 1s;
+}
+.btn:hover {
+	color: #777;
+	font-size: 1.5em;
+	background: #0f0;
+	box-shadow: 0em 0em 0.5em 0.5em #0f0;
 }
 
 /* --- Custom Variables--- */

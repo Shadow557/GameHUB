@@ -2,6 +2,7 @@ import * as model from "./model.js";
 import displayACC from "./mainDisplays/displayAcc.js";
 import displaySettings from "./mainDisplays/displaySettings.js";
 import displayMe from "./mainDisplays/displayMe.js";
+import displayMain from "./mainDisplays/displayMain.js";
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
@@ -164,6 +165,11 @@ function controlDisplayMe() {
 	});
 }
 
+function controlDisplayMain() {
+	const myData = model.data;
+	displayMain.render(myData, true);
+}
+
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -173,4 +179,5 @@ function controlDisplayMe() {
 	displayACC.addHandlerRender(controlDisplayAcc);
 	displaySettings.addHandlerRender(controlDisplaySettings);
 	displayMe.addHandlerRender(controlDisplayMe);
+	controlDisplayMain();
 })();

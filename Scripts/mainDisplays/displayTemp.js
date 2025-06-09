@@ -31,6 +31,7 @@ export default class Display {
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
 		console.log(this._parentElement.innerHTML);
+		console.log(this._parentElement.innerHTML.classList);
 
 		this._parentElement.classList.remove("hidden");
 	}

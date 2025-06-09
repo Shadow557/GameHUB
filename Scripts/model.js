@@ -14,6 +14,7 @@ export const data = {
 		wins: 0,
 		losses: 0,
 		games: 0,
+		currentPage: 0,
 	},
 
 	// Dati del sito web
