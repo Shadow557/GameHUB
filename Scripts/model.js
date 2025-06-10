@@ -46,5 +46,19 @@ export const data = {
 
 	// Dati dei giochi
 	// Inizializzati con un array vuoto
-	games: [],
+	allGames: {
+		minigames: [
+			{
+				name: "Minefield",
+				icon: "../Pictures/ShadowShining.png",
+				data: {},
+			},
+			{
+				name: "Solitaire",
+				icon: "../Pictures/ShadowShining.png",
+				data: {},
+			},
+		],
+		games: [],
+	},
 };

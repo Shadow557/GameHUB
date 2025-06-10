@@ -1,7 +1,7 @@
 import Display from "./displayTemp.js";
 
-class displayMain extends Display {
-	_parentElement = document.querySelector("#gameZone");
+class displayMainMinigames extends Display {
+	_parentElement = document.querySelector("#minigames");
 	_errorMessage = "My info are not available. Sorry.";
 
 	/**
@@ -10,8 +10,8 @@ class displayMain extends Display {
 	 * @returns {String} - Il markup HTML generato.
 	 */
 	_generateMarkup() {
-		return `<div id="minigames" class="btn">Play Minigames</div>
-                <div class="btn" id="games">Play Games</div>`;
+		// return this._data.map(result => previewView.render(result, false)).join('');
+		console.log(this._data);
 	}
 
 	/**
@@ -20,16 +20,14 @@ class displayMain extends Display {
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
 	 */
-	addHandlerRender(handler, handler2) {
-		this.addEventListener("click", (e) => {
-			let target = e.target.closest("#games");
-			if (!target) target = e.target.closest("#minigames");
-			if (!target) return;
-
+	addHandlerRender(handler) {
+		console.log(document.querySelector("#minigames"));
+		console.log(`this-parent`);
+		console.log(this._parentElement);
+		this._parentElement.addEventListener("click", (e) => {
 			e.preventDefault();
-			if (target === e.target.closest("#games")) handler();
-			else handler2();
+			handler();
 		});
 	}
 }
-export default new displayMain();
+export default new displayMainMinigames();

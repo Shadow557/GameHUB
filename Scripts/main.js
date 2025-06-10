@@ -3,6 +3,7 @@ import displayACC from "./mainDisplays/displayAcc.js";
 import displaySettings from "./mainDisplays/displaySettings.js";
 import displayMe from "./mainDisplays/displayMe.js";
 import displayMain from "./mainDisplays/displayMain.js";
+import displayMainMinigames from "./mainDisplays/displayMainMinigames.js";
 
 function getCookie(name) {
 	const value = `; ${document.cookie}`;
@@ -25,6 +26,7 @@ function getCookie(name) {
  */
 function controlDisplayAcc() {
 	const userData = model.data.userData;
+	displayMain._parentElement.classList.add("hidden");
 	displayACC.render(userData, true);
 
 	document.querySelector("#accButtons").addEventListener("click", (e) => {
@@ -83,6 +85,7 @@ function editAccountInfo() {
 function exitDisplay() {
 	// console.log(`exitAccountInfo() called`);
 	displayACC._parentElement.classList.add("hidden");
+	displayMain._parentElement.classList.remove("hidden");
 }
 
 /**
@@ -95,6 +98,7 @@ function exitDisplay() {
  */
 function controlDisplaySettings() {
 	const userSettings = model.data.settings;
+	displayMain._parentElement.classList.add("hidden");
 	displaySettings.render(userSettings, true);
 
 	// Aggiunge un gestore di eventi per il pulsante delle impostazioni
@@ -157,6 +161,7 @@ function controlDisplaySettings() {
 
 function controlDisplayMe() {
 	const myData = model.data;
+	displayMain._parentElement.classList.add("hidden");
 	displayMe.render(myData, true);
 
 	document.querySelector("#exit").addEventListener("click", (e) => {
@@ -169,6 +174,8 @@ function controlDisplayMain() {
 	const myData = model.data;
 	displayMain.render(myData, true);
 }
+
+function controlDisplayMainMinigames() {}
 
 /**
  * @author Gabriele Papa Benigno

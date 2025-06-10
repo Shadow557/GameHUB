@@ -30,8 +30,8 @@ export default class Display {
 		// Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
 		this._clear();
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
-		console.log(this._parentElement.innerHTML);
-		console.log(this._parentElement.innerHTML.classList);
+		// console.log(this);
+		// console.log(this._parentElement.innerHTML.classList);
 
 		this._parentElement.classList.remove("hidden");
 	}
