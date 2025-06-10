@@ -111,12 +111,8 @@ img {
   color: #fff;
   z-index: 1;
   background-color: #000;
-  flex: 1;
-  height: 100%;
-}
-
-#main {
   flex-direction: row;
+  flex: 1;
   justify-content: space-around;
   align-items: center;
   height: 100%;
@@ -148,6 +144,7 @@ img {
   background: #ff0;
   border-radius: 50%;
   padding: 1em;
+  font-size: 4vh;
   transition: all 1s;
   box-shadow: 0 0 .5em .5em #ff0;
 }
@@ -155,7 +152,7 @@ img {
 .btn:hover {
   color: #777;
   background: #0f0;
-  font-size: 1.5em;
+  font-size: 5vh;
   box-shadow: 0 0 .5em .5em #0f0;
 }
 

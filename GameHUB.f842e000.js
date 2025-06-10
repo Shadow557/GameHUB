@@ -677,6 +677,8 @@ var _displayMeJs = require("./mainDisplays/displayMe.js");
 var _displayMeJsDefault = parcelHelpers.interopDefault(_displayMeJs);
 var _displayMainJs = require("./mainDisplays/displayMain.js");
 var _displayMainJsDefault = parcelHelpers.interopDefault(_displayMainJs);
+var _displayMainMinigamesJs = require("./mainDisplays/displayMainMinigames.js");
+var _displayMainMinigamesJsDefault = parcelHelpers.interopDefault(_displayMainMinigamesJs);
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -695,6 +697,7 @@ function getCookie(name) {
  * @returns {void}
  */ function controlDisplayAcc() {
     const userData = _modelJs.data.userData;
+    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
     (0, _displayAccJsDefault.default).render(userData, true);
     document.querySelector("#accButtons").addEventListener("click", (e)=>{
         e.preventDefault();
@@ -743,6 +746,7 @@ function getCookie(name) {
  */ function exitDisplay() {
     // console.log(`exitAccountInfo() called`);
     (0, _displayAccJsDefault.default)._parentElement.classList.add("hidden");
+    (0, _displayMainJsDefault.default)._parentElement.classList.remove("hidden");
 }
 /**
  * @author Gabriele Papa Benigno
@@ -753,6 +757,7 @@ function getCookie(name) {
  * @returns {void}
  */ function controlDisplaySettings() {
     const userSettings = _modelJs.data.settings;
+    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
     (0, _displaySettingsJsDefault.default).render(userSettings, true);
     // Aggiunge un gestore di eventi per il pulsante delle impostazioni
     document.querySelector("#editSettings").addEventListener("click", (e)=>{
@@ -803,6 +808,7 @@ function getCookie(name) {
 }
 function controlDisplayMe() {
     const myData = _modelJs.data;
+    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
     (0, _displayMeJsDefault.default).render(myData, true);
     document.querySelector("#exit").addEventListener("click", (e)=>{
         e.preventDefault();
@@ -813,6 +819,7 @@ function controlDisplayMain() {
     const myData = _modelJs.data;
     (0, _displayMainJsDefault.default).render(myData, true);
 }
+function controlDisplayMainMinigames() {}
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -824,7 +831,7 @@ function controlDisplayMain() {
     controlDisplayMain();
 })();
 
-},{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6"}],"361Ju":[function(require,module,exports,__globalThis) {
+},{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6","./mainDisplays/displayMainMinigames.js":"5Uygo"}],"361Ju":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "data", ()=>data);
@@ -881,7 +888,21 @@ const data = {
     },
     // Dati dei giochi
     // Inizializzati con un array vuoto
-    games: []
+    allGames: {
+        minigames: [
+            {
+                name: "Minefield",
+                icon: "../Pictures/ShadowShining.png",
+                data: {}
+            },
+            {
+                name: "Solitaire",
+                icon: "../Pictures/ShadowShining.png",
+                data: {}
+            }
+        ],
+        games: []
+    }
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
@@ -1024,8 +1045,8 @@ class Display {
         // Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
         this._clear();
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
-        console.log(this._parentElement.innerHTML);
-        console.log(this._parentElement.innerHTML.classList);
+        // console.log(this);
+        // console.log(this._parentElement.innerHTML.classList);
         this._parentElement.classList.remove("hidden");
     }
     /**
@@ -1261,19 +1282,48 @@ var _displayTempJs = require("./displayTemp.js");
 var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
 class displayMain extends (0, _displayTempJsDefault.default) {
     _parentElement = document.querySelector("#gameZone");
-    _targetElement = document.querySelector("#header");
     _errorMessage = "My info are not available. Sorry.";
     /**
 	 * @author Gabriele Papa Benigno
 	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
 	 * @returns {String} - Il markup HTML generato.
 	 */ _generateMarkup() {
-        return `<div id="main">
-                    <div class="btn" id="minigames">Play Minigames</div>
-                    <div class="btn" id="games">Play Games</div>
-                    <div class="btn">temp</div>
-                    <div class="btn">temp</div>
-                </div>`;
+        return `<div id="minigames" class="btn">Play Minigames</div>
+                <div class="btn" id="games">Play Games</div>`;
+    }
+    /**
+	 * @author Gabriele Papa Benigno
+	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
+	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
+	 * @returns {void}
+	 */ addHandlerRender(handler, handler2) {
+        this.addEventListener("click", (e)=>{
+            let target = e.target.closest("#games");
+            if (!target) target = e.target.closest("#minigames");
+            if (!target) return;
+            e.preventDefault();
+            if (target === e.target.closest("#games")) handler();
+            else handler2();
+        });
+    }
+}
+exports.default = new displayMain();
+
+},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"5Uygo":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _displayTempJs = require("./displayTemp.js");
+var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
+class displayMainMinigames extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector("#minigames");
+    _errorMessage = "My info are not available. Sorry.";
+    /**
+	 * @author Gabriele Papa Benigno
+	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
+	 * @returns {String} - Il markup HTML generato.
+	 */ _generateMarkup() {
+        // return this._data.map(result => previewView.render(result, false)).join('');
+        console.log(this._data);
     }
     /**
 	 * @author Gabriele Papa Benigno
@@ -1281,15 +1331,16 @@ class displayMain extends (0, _displayTempJsDefault.default) {
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
 	 */ addHandlerRender(handler) {
-        this._targetElement.addEventListener("click", (e)=>{
-            const target = e.target.closest("#logo");
-            if (!target) return;
+        console.log(document.querySelector("#minigames"));
+        console.log(`this-parent`);
+        console.log(this._parentElement);
+        this._parentElement.addEventListener("click", (e)=>{
             e.preventDefault();
             handler();
         });
     }
 }
-exports.default = new displayMain();
+exports.default = new displayMainMinigames();
 
 },{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {})
 
