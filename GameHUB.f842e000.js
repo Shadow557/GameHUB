@@ -747,6 +747,7 @@ function getCookie(name) {
     // console.log(`exitAccountInfo() called`);
     (0, _displayAccJsDefault.default)._parentElement.classList.add("hidden");
     (0, _displayMainJsDefault.default)._parentElement.classList.remove("hidden");
+    if (!(0, _displayMainJsDefault.default)._parentElement.innerHTML) controlDisplayMain();
 }
 /**
  * @author Gabriele Papa Benigno
@@ -809,17 +810,30 @@ function getCookie(name) {
 function controlDisplayMe() {
     const myData = _modelJs.data;
     (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
+    (0, _displayMainJsDefault.default)._parentElement.innerHTML = "";
     (0, _displayMeJsDefault.default).render(myData, true);
     document.querySelector("#exit").addEventListener("click", (e)=>{
         e.preventDefault();
         exitDisplay();
     });
 }
-function controlDisplayMain() {
+function controlDisplayMain(target) {
     const myData = _modelJs.data;
-    (0, _displayMainJsDefault.default).render(myData, true);
+    if (!target) {
+        (0, _displayMainJsDefault.default).render(myData, true);
+        return;
+    }
+    if (myData.userData.currentPage !== 0) return;
+    myData.userData.currentPage = 1;
+    if (target === document.querySelector("#minigames")) {
+        console.log(`minigames`); //DEBUG
+        controlDisplayMainMinigames(myData);
+    } else console.log(`games`); //DEBUG
 }
-function controlDisplayMainMinigames() {}
+function controlDisplayMainMinigames(myData) {
+    console.log(myData);
+    (0, _displayMainMinigamesJsDefault.default).render(myData, true);
+}
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -828,7 +842,8 @@ function controlDisplayMainMinigames() {}
     (0, _displayAccJsDefault.default).addHandlerRender(controlDisplayAcc);
     (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
     (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
-    controlDisplayMain();
+    (0, _displayMainJsDefault.default).addHandlerRender(controlDisplayMain);
+// displayMainMinigames.addHandlerRender(controlDisplayMainMinigames);
 })();
 
 },{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6","./mainDisplays/displayMainMinigames.js":"5Uygo"}],"361Ju":[function(require,module,exports,__globalThis) {
@@ -892,12 +907,12 @@ const data = {
         minigames: [
             {
                 name: "Minefield",
-                icon: "../Pictures/ShadowShining.png",
+                icon: "Pictures/Guest.png",
                 data: {}
             },
             {
                 name: "Solitaire",
-                icon: "../Pictures/ShadowShining.png",
+                icon: "Pictures/Guest.png",
                 data: {}
             }
         ],
@@ -1044,6 +1059,7 @@ class Display {
         if (!render) return markup;
         // Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
         this._clear();
+        console.log(this._parentElement);
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
         // console.log(this);
         // console.log(this._parentElement.innerHTML.classList);
@@ -1296,14 +1312,14 @@ class displayMain extends (0, _displayTempJsDefault.default) {
 	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
-	 */ addHandlerRender(handler, handler2) {
-        this.addEventListener("click", (e)=>{
+	 */ addHandlerRender(handler) {
+        console.log();
+        this._parentElement.addEventListener("click", (e)=>{
             let target = e.target.closest("#games");
             if (!target) target = e.target.closest("#minigames");
-            if (!target) return;
+            else if (!target) return;
             e.preventDefault();
-            if (target === e.target.closest("#games")) handler();
-            else handler2();
+            handler(target);
         });
     }
 }
@@ -1315,7 +1331,7 @@ parcelHelpers.defineInteropFlag(exports);
 var _displayTempJs = require("./displayTemp.js");
 var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
 class displayMainMinigames extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector("#minigames");
+    _parentElement = document.querySelector("#gameZone");
     _errorMessage = "My info are not available. Sorry.";
     /**
 	 * @author Gabriele Papa Benigno
@@ -1323,7 +1339,19 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
 	 * @returns {String} - Il markup HTML generato.
 	 */ _generateMarkup() {
         // return this._data.map(result => previewView.render(result, false)).join('');
-        console.log(this._data);
+        // console.log(this._data.allGames.minigames);
+        let str = "";
+        let i = 0;
+        this._data.allGames.minigames.map((game)=>{
+            str += `<div class='game' id='${++i}'>`;
+            str += `<h2>${game.name}</h2>`;
+            str += `<img src="${game.icon}" alt="${game.name}" />`;
+            console.log(game.icon);
+            str += "</div>";
+        });
+        console.log(str);
+        var e;
+        return str;
     }
     /**
 	 * @author Gabriele Papa Benigno
@@ -1331,11 +1359,9 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
 	 */ addHandlerRender(handler) {
-        console.log(document.querySelector("#minigames"));
-        console.log(`this-parent`);
-        console.log(this._parentElement);
         this._parentElement.addEventListener("click", (e)=>{
             e.preventDefault();
+            console.log(e.target);
             handler();
         });
     }
