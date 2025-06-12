@@ -20,15 +20,15 @@ class displayMain extends Display {
 	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
 	 * @returns {void}
 	 */
-	addHandlerRender(handler, handler2) {
-		this.addEventListener("click", (e) => {
+	addHandlerRender(handler) {
+		console.log();
+		this._parentElement.addEventListener("click", (e) => {
 			let target = e.target.closest("#games");
 			if (!target) target = e.target.closest("#minigames");
-			if (!target) return;
+			else if (!target) return;
 
 			e.preventDefault();
-			if (target === e.target.closest("#games")) handler();
-			else handler2();
+			handler(target);
 		});
 	}
 }

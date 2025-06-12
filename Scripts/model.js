@@ -50,12 +50,12 @@ export const data = {
 		minigames: [
 			{
 				name: "Minefield",
-				icon: "../Pictures/ShadowShining.png",
+				icon: "Pictures/Guest.png",
 				data: {},
 			},
 			{
 				name: "Solitaire",
-				icon: "../Pictures/ShadowShining.png",
+				icon: "Pictures/Guest.png",
 				data: {},
 			},
 		],

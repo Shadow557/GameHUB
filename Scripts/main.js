@@ -86,6 +86,7 @@ function exitDisplay() {
 	// console.log(`exitAccountInfo() called`);
 	displayACC._parentElement.classList.add("hidden");
 	displayMain._parentElement.classList.remove("hidden");
+	if (!displayMain._parentElement.innerHTML) controlDisplayMain();
 }
 
 /**
@@ -162,6 +163,7 @@ function controlDisplaySettings() {
 function controlDisplayMe() {
 	const myData = model.data;
 	displayMain._parentElement.classList.add("hidden");
+	displayMain._parentElement.innerHTML = "";
 	displayMe.render(myData, true);
 
 	document.querySelector("#exit").addEventListener("click", (e) => {
@@ -170,12 +172,29 @@ function controlDisplayMe() {
 	});
 }
 
-function controlDisplayMain() {
+function controlDisplayMain(target) {
 	const myData = model.data;
-	displayMain.render(myData, true);
+
+	if (!target) {
+		displayMain.render(myData, true);
+		return;
+	}
+
+	if (myData.userData.currentPage !== 0) return;
+	myData.userData.currentPage = 1;
+
+	if (target === document.querySelector("#minigames")) {
+		console.log(`minigames`); //DEBUG
+		controlDisplayMainMinigames(myData);
+	} else {
+		console.log(`games`); //DEBUG
+	}
 }
 
-function controlDisplayMainMinigames() {}
+function controlDisplayMainMinigames(myData) {
+	console.log(myData);
+	displayMainMinigames.render(myData, true);
+}
 
 /**
  * @author Gabriele Papa Benigno
@@ -186,5 +205,6 @@ function controlDisplayMainMinigames() {}
 	displayACC.addHandlerRender(controlDisplayAcc);
 	displaySettings.addHandlerRender(controlDisplaySettings);
 	displayMe.addHandlerRender(controlDisplayMe);
-	controlDisplayMain();
+	displayMain.addHandlerRender(controlDisplayMain);
+	// displayMainMinigames.addHandlerRender(controlDisplayMainMinigames);
 })();

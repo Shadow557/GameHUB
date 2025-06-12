@@ -173,9 +173,9 @@ img {
 }
 
 .btn {
-	font-size: clamp(1vh, 4vh, 8vh);
+	font-size: clamp(1vw, 4vw, 8vw);
 	color: #000;
-	padding: 1em;
+	padding: 1vw;
 	background: #ff0;
 	box-shadow: 0em 0em 0.5em 0.5em #ff0;
 	border-radius: 50%;
@@ -184,9 +184,23 @@ img {
 }
 .btn:hover {
 	color: #777;
-	font-size: clamp(2vh, 5vh, 9vh);
+	font-size: clamp(2vw, 5vw, 9vw);
 	background: #0f0;
 	box-shadow: 0em 0em 0.5em 0.5em #0f0;
+}
+
+.game {
+	border: 1px solid #fff;
+	padding: 4vw;
+	border-radius: 50%;
+	background-color: #fff;
+	color: #000;
+}
+.game h2 {
+	font-size: 6vw;
+}
+.game img {
+	size: 50%;
 }
 
 /* --- Custom Variables--- */
