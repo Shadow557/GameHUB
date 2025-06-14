@@ -47,18 +47,84 @@ export const data = {
 	// Dati dei giochi
 	// Inizializzati con un array vuoto
 	allGames: {
+		id: { category: "minigames", game: 0 },
 		minigames: [
 			{
-				name: "Minefield",
+				name: "Tic Tac Toe",
+				icon: "/Pictures/Guest.png",
+				data: {
+					id: "tic-tac-toe",
+					description: "A classic game of Tic Tac Toe.",
+				},
+			},
+			{
+				name: "2048",
 				icon: "Pictures/Guest.png",
-				data: {},
+				data: {
+					id: "2048",
+					description:
+						"A sliding puzzle game where the goal is to combine tiles with the same number.",
+				},
+			},
+			{
+				name: "Minesweeper",
+				icon: "Pictures/Guest.png",
+				data: {
+					id: "minesweeper",
+					description:
+						"A classic puzzle game where the goal is to clear a minefield without detonating any mines.",
+				},
+			},
+			{
+				name: "Snake",
+				icon: "Pictures/Guest.png",
+				data: {
+					id: "snake",
+					description:
+						"A classic arcade game where the player controls a snake that grows in length.",
+				},
+			},
+			{
+				name: "Sudoku",
+				icon: "Pictures/Guest.png",
+				data: {
+					id: "sudoku",
+					description:
+						"A logic-based number placement puzzle where the goal is to fill a grid with numbers so that each column, row, and subgrid contains all the digits from 1 to 9.",
+				},
 			},
 			{
 				name: "Solitaire",
 				icon: "Pictures/Guest.png",
-				data: {},
+				data: {
+					id: "solitaire",
+					description:
+						"A card game where the goal is to move all cards to foundation piles in a specific order.",
+				},
 			},
 		],
 		games: [],
 	},
+};
+
+export const setCurrentIndex = (index) => {
+	if (index < 0) {
+		data.allGames.id.game = data.allGames.minigames.length - 1; // Reset to last game if index is out of bounds
+		return;
+	} else if (index >= data.allGames.minigames.length) {
+		data.allGames.id.game = 0; // Reset to first game if index is out of bounds
+		return;
+	}
+
+	data.allGames.id.game = index;
+};
+
+export const getByCurrentIndex = () => {
+	const category = data.allGames.id.category;
+	const game = data.allGames.id.game;
+	// const gameArr = data.allGames[category];
+	// console.log(game, category); // DEBUG
+	// console.log(gameArr[0]); // DEBUG
+
+	return data.allGames[category][game];
 };

@@ -29,7 +29,7 @@ export default class Display {
 
 		// Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
 		this._clear();
-		console.log(this._parentElement);
+		// console.log(this._parentElement);
 		this._parentElement.insertAdjacentHTML("afterbegin", markup);
 		// console.log(this);
 		// console.log(this._parentElement.innerHTML.classList);
@@ -67,7 +67,7 @@ export default class Display {
 	 * 2) Viene creato un nuovo Markup.
 	 * 3) Viene generato un nuovo DOM virtuale.
 	 * 4) Vengono raccolti in due array gli elementi del nuovo DOM virtuale + quelli di quello attuale.
-	 * 5) Attraverso un forEach viene fatto un controllo su gli elementi presenti negli array, se uno presente nell'array 'vecchio' non cambacia con quello aggiornato, esso viene sovrascritto, sia che sia soltanto il testo, sia che siano i suoi attributi.
+	 * 5) Attraverso un forEach viene fatto un controllo sugli elementi presenti negli array, se uno presente nell'array 'vecchio' non cambacia con quello aggiornato, esso viene sovrascritto, sia che sia soltanto il testo, sia che siano i suoi attributi.
 	 * @param {Array} data - I dati nuovi che andranno aggiornati sulla schermata.
 	 * @returns {void}
 	 */

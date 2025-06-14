@@ -23,12 +23,13 @@ class displayMain extends Display {
 	addHandlerRender(handler) {
 		console.log();
 		this._parentElement.addEventListener("click", (e) => {
-			let target = e.target.closest("#games");
-			if (!target) target = e.target.closest("#minigames");
-			else if (!target) return;
+			// let target = e.target.closest("#games");
+			// if (!target) target = e.target.closest("#minigames");
+			// else if (!target) return;
 
 			e.preventDefault();
-			handler(target);
+			// handler(target);
+			handler(e.target);
 		});
 	}
 }
