@@ -130,7 +130,7 @@
 
   // Only insert newRequire.load when it is actually used.
   // The code in this file is linted against ES5, so dynamic import is not allowed.
-  // INSERT_LOAD_HERE
+  function $parcel$resolve(url) {  url = importMap[url] || url;  return import.meta.resolve(distDir + url);}newRequire.resolve = $parcel$resolve;
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -819,20 +819,57 @@ function controlDisplayMe() {
 }
 function controlDisplayMain(target) {
     const myData = _modelJs.data;
-    if (!target) {
-        (0, _displayMainJsDefault.default).render(myData, true);
-        return;
-    }
+    // console.log(myData.userData.currentPage); //DEBUG
+    // console.log(target); //DEBUG
     if (myData.userData.currentPage !== 0) return;
     myData.userData.currentPage = 1;
-    if (target === document.querySelector("#minigames")) {
-        console.log(`minigames`); //DEBUG
-        controlDisplayMainMinigames(myData);
-    } else console.log(`games`); //DEBUG
+    // if (target === document.querySelector("#minigames")) {
+    // 	console.log(`minigames`); //DEBUG
+    // 	// controlDisplayMainMinigames("tic-tac-toe", myData);
+    // 	myData.userData.currentPage = 0;
+    // } else {
+    // 	console.log(`games`); //DEBUG
+    // 	myData.userData.currentPage = 0;
+    // }
+    switch(target.id){
+        case "minigames":
+            controlDisplayMainMinigames();
+            break;
+        case "games":
+            console.log(`games`); //DEBUG
+            break;
+        case "back":
+            controlDisplayMainMinigamesManagement(0);
+            break;
+        case "next":
+            controlDisplayMainMinigamesManagement(1);
+            break;
+        case "exit":
+            controlDisplayMainMinigamesManagement();
+            break;
+    }
+    myData.userData.currentPage = 0;
 }
-function controlDisplayMainMinigames(myData) {
-    console.log(myData);
-    (0, _displayMainMinigamesJsDefault.default).render(myData, true);
+function controlDisplayMainMinigames() {
+    // console.log(`---minigames---`); //DEBUG
+    _modelJs.setCurrentIndex(0); //DEBUG
+    const currMinigame = _modelJs.getByCurrentIndex();
+    // console.log(currMinigame); //DEBUG
+    (0, _displayMainMinigamesJsDefault.default).render(currMinigame, true);
+}
+function controlDisplayMainMinigamesManagement(flag) {
+    // console.log(`---minigames back---`); //DEBUG
+    if (flag === 0) _modelJs.setCurrentIndex(_modelJs.data.allGames.id.game - 1);
+    else if (flag === 1) _modelJs.setCurrentIndex(_modelJs.data.allGames.id.game + 1);
+    else {
+        _modelJs.setCurrentIndex(0);
+        console.log(`---minigames exit---`); //DEBUG
+        (0, _displayMainJsDefault.default).render(1, true);
+        return;
+    }
+    const currMinigame = _modelJs.getByCurrentIndex();
+    (0, _displayMainMinigamesJsDefault.default).update(currMinigame, true);
+// console.log(currMinigame); //DEBUG
 }
 /**
  * @author Gabriele Papa Benigno
@@ -843,13 +880,14 @@ function controlDisplayMainMinigames(myData) {
     (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
     (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
     (0, _displayMainJsDefault.default).addHandlerRender(controlDisplayMain);
-// displayMainMinigames.addHandlerRender(controlDisplayMainMinigames);
 })();
 
 },{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6","./mainDisplays/displayMainMinigames.js":"5Uygo"}],"361Ju":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "data", ()=>data);
+parcelHelpers.export(exports, "setCurrentIndex", ()=>setCurrentIndex);
+parcelHelpers.export(exports, "getByCurrentIndex", ()=>getByCurrentIndex);
 const data = {
     // Tutti i dati dell'account utente
     // Inizializzati con valori di default per un utente non registrato
@@ -904,20 +942,80 @@ const data = {
     // Dati dei giochi
     // Inizializzati con un array vuoto
     allGames: {
+        id: {
+            category: "minigames",
+            game: 0
+        },
         minigames: [
             {
-                name: "Minefield",
+                name: "Tic Tac Toe",
+                icon: "/Pictures/Guest.png",
+                data: {
+                    id: "tic-tac-toe",
+                    description: "A classic game of Tic Tac Toe."
+                }
+            },
+            {
+                name: "2048",
                 icon: "Pictures/Guest.png",
-                data: {}
+                data: {
+                    id: "2048",
+                    description: "A sliding puzzle game where the goal is to combine tiles with the same number."
+                }
+            },
+            {
+                name: "Minesweeper",
+                icon: "Pictures/Guest.png",
+                data: {
+                    id: "minesweeper",
+                    description: "A classic puzzle game where the goal is to clear a minefield without detonating any mines."
+                }
+            },
+            {
+                name: "Snake",
+                icon: "Pictures/Guest.png",
+                data: {
+                    id: "snake",
+                    description: "A classic arcade game where the player controls a snake that grows in length."
+                }
+            },
+            {
+                name: "Sudoku",
+                icon: "Pictures/Guest.png",
+                data: {
+                    id: "sudoku",
+                    description: "A logic-based number placement puzzle where the goal is to fill a grid with numbers so that each column, row, and subgrid contains all the digits from 1 to 9."
+                }
             },
             {
                 name: "Solitaire",
                 icon: "Pictures/Guest.png",
-                data: {}
+                data: {
+                    id: "solitaire",
+                    description: "A card game where the goal is to move all cards to foundation piles in a specific order."
+                }
             }
         ],
         games: []
     }
+};
+const setCurrentIndex = (index)=>{
+    if (index < 0) {
+        data.allGames.id.game = data.allGames.minigames.length - 1; // Reset to last game if index is out of bounds
+        return;
+    } else if (index >= data.allGames.minigames.length) {
+        data.allGames.id.game = 0; // Reset to first game if index is out of bounds
+        return;
+    }
+    data.allGames.id.game = index;
+};
+const getByCurrentIndex = ()=>{
+    const category = data.allGames.id.category;
+    const game = data.allGames.id.game;
+    // const gameArr = data.allGames[category];
+    // console.log(game, category); // DEBUG
+    // console.log(gameArr[0]); // DEBUG
+    return data.allGames[category][game];
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jnFvT":[function(require,module,exports,__globalThis) {
@@ -1059,7 +1157,7 @@ class Display {
         if (!render) return markup;
         // Altrimenti, pulisce il contenuto del parentElement e inserisce il nuovo markup
         this._clear();
-        console.log(this._parentElement);
+        // console.log(this._parentElement);
         this._parentElement.insertAdjacentHTML("afterbegin", markup);
         // console.log(this);
         // console.log(this._parentElement.innerHTML.classList);
@@ -1090,7 +1188,7 @@ class Display {
 	 * 2) Viene creato un nuovo Markup.
 	 * 3) Viene generato un nuovo DOM virtuale.
 	 * 4) Vengono raccolti in due array gli elementi del nuovo DOM virtuale + quelli di quello attuale.
-	 * 5) Attraverso un forEach viene fatto un controllo su gli elementi presenti negli array, se uno presente nell'array 'vecchio' non cambacia con quello aggiornato, esso viene sovrascritto, sia che sia soltanto il testo, sia che siano i suoi attributi.
+	 * 5) Attraverso un forEach viene fatto un controllo sugli elementi presenti negli array, se uno presente nell'array 'vecchio' non cambacia con quello aggiornato, esso viene sovrascritto, sia che sia soltanto il testo, sia che siano i suoi attributi.
 	 * @param {Array} data - I dati nuovi che andranno aggiornati sulla schermata.
 	 * @returns {void}
 	 */ update(data) {
@@ -1315,11 +1413,12 @@ class displayMain extends (0, _displayTempJsDefault.default) {
 	 */ addHandlerRender(handler) {
         console.log();
         this._parentElement.addEventListener("click", (e)=>{
-            let target = e.target.closest("#games");
-            if (!target) target = e.target.closest("#minigames");
-            else if (!target) return;
+            // let target = e.target.closest("#games");
+            // if (!target) target = e.target.closest("#minigames");
+            // else if (!target) return;
             e.preventDefault();
-            handler(target);
+            // handler(target);
+            handler(e.target);
         });
     }
 }
@@ -1330,6 +1429,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _displayTempJs = require("./displayTemp.js");
 var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
+var _guestPng = require("url:../../Pictures/Guest.png");
+var _guestPngDefault = parcelHelpers.interopDefault(_guestPng);
 class displayMainMinigames extends (0, _displayTempJsDefault.default) {
     _parentElement = document.querySelector("#gameZone");
     _errorMessage = "My info are not available. Sorry.";
@@ -1338,36 +1439,22 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
 	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
 	 * @returns {String} - Il markup HTML generato.
 	 */ _generateMarkup() {
-        // return this._data.map(result => previewView.render(result, false)).join('');
-        // console.log(this._data.allGames.minigames);
-        let str = "";
-        let i = 0;
-        this._data.allGames.minigames.map((game)=>{
-            str += `<div class='game' id='${++i}'>`;
-            str += `<h2>${game.name}</h2>`;
-            str += `<img src="${game.icon}" alt="${game.name}" />`;
-            console.log(game.icon);
-            str += "</div>";
-        });
-        console.log(str);
-        var e;
+        let str = `<div class="btn" id="back">\u{2190}</div>
+			<div class="game" id="${this._data.data.id}">
+				<h2>${this._data.name}</h2>
+				<img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
+			</div>
+			<div class="btn" id="next">\u{2192}</div>
+			<div class="btn" id="exit">Back</div>
+		</div>`;
         return str;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        this._parentElement.addEventListener("click", (e)=>{
-            e.preventDefault();
-            console.log(e.target);
-            handler();
-        });
     }
 }
 exports.default = new displayMainMinigames();
 
-},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {})
+},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","url:../../Pictures/Guest.png":"1I3ec"}],"1I3ec":[function(require,module,exports,__globalThis) {
+module.exports = module.bundle.resolve("Guest.d494ac35.png") + "?" + Date.now();
+
+},{}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {}, "./", "/")
 
 //# sourceMappingURL=GameHUB.f842e000.js.map
