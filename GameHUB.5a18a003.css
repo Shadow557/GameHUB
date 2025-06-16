@@ -159,10 +159,11 @@ img {
 .btn {
   color: #000;
   cursor: pointer;
+  text-align: center;
   background: #ff0;
   border-radius: 50%;
   padding: 1vw;
-  font-size: 4vw;
+  font-size: 2vw;
   transition: all 1s;
   box-shadow: 0 0 .5em .5em #ff0;
 }
@@ -170,7 +171,7 @@ img {
 .btn:hover {
   color: #777;
   background: #0f0;
-  font-size: 5vw;
+  font-size: 3vw;
   box-shadow: 0 0 .5em .5em #0f0;
 }
 
@@ -185,9 +186,7 @@ img {
 }
 
 .btn#exit {
-  font-size: 3vh;
-  position: absolute;
-  bottom: 10vw;
+  order: 2;
 }
 
 .game {
@@ -197,24 +196,35 @@ img {
   border: 1px solid #fff;
   border-radius: 50%;
   flex-direction: column;
+  order: 1;
   justify-content: center;
   align-items: center;
+  max-width: 20vw;
+  max-height: 20vh;
   padding: 4vw;
   display: flex;
 }
 
 .game h2 {
-  font-size: 6vw;
+  font-size: 2vw;
 }
 
 .game img {
-  width: 10vw;
-  height: 10vw;
+  width: 8vw;
+  height: 8vw;
 }
 
 :root {
   --sfumaturaTitolo: linear-gradient(to top, red, black);
   --sfumaturaSottotitolo: linear-gradient(to top, black, red);
   --sfumaturaSfondo: radial-gradient(circle, #000 60%, #640000 100%);
+}
+
+.column {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10vh;
+  display: flex;
 }
 /*# sourceMappingURL=GameHUB.5a18a003.css.map */

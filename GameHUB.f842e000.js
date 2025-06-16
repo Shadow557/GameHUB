@@ -871,6 +871,12 @@ function controlDisplayMainMinigamesManagement(flag) {
     (0, _displayMainMinigamesJsDefault.default).update(currMinigame, true);
 // console.log(currMinigame); //DEBUG
 }
+function controlMinigames(target) {
+    _modelJs.setCurrentIndex(2);
+    // console.log(target); //DEBUG
+    console.log(target.id); //DEBUG
+    target && target.id;
+}
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -880,6 +886,7 @@ function controlDisplayMainMinigamesManagement(flag) {
     (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
     (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
     (0, _displayMainJsDefault.default).addHandlerRender(controlDisplayMain);
+    (0, _displayMainMinigamesJsDefault.default).addHandlerRender(controlMinigames);
 })();
 
 },{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6","./mainDisplays/displayMainMinigames.js":"5Uygo"}],"361Ju":[function(require,module,exports,__globalThis) {
@@ -1416,7 +1423,7 @@ class displayMain extends (0, _displayTempJsDefault.default) {
             // let target = e.target.closest("#games");
             // if (!target) target = e.target.closest("#minigames");
             // else if (!target) return;
-            e.preventDefault();
+            // e.preventDefault();
             // handler(target);
             handler(e.target);
         });
@@ -1437,17 +1444,39 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
     /**
 	 * @author Gabriele Papa Benigno
 	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
+	 * NON TOCCARE! PORCA TROIA!!
 	 * @returns {String} - Il markup HTML generato.
 	 */ _generateMarkup() {
+        // DEBUG https://it.wikipedia.org/wiki/Pagina_principale
         let str = `<div class="btn" id="back">\u{2190}</div>
-			<div class="game" id="${this._data.data.id}">
+			<div class="column">
+				<div class="game" id="${this._data.data.id}">
 				<h2>${this._data.name}</h2>
-				<img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
+				<a href="Pages/tic-tac-toe.html">
+					<img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
+				</a>
+			</div>
+				<div class="btn" id="exit">Back</div>
 			</div>
 			<div class="btn" id="next">\u{2192}</div>
-			<div class="btn" id="exit">Back</div>
 		</div>`;
         return str;
+    }
+    /**
+	 * @author Gabriele Papa Benigno
+	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
+	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
+	 * @returns {void}
+	 */ addHandlerRender(handler) {
+        console.log();
+        this._parentElement.addEventListener("click", (e)=>{
+            // console.log(e);
+            // console.log(e.target);
+            const target = e.target.closest(".game");
+            if (!target) return;
+            // e.preventDefault();
+            handler(target);
+        });
     }
 }
 exports.default = new displayMainMinigames();
