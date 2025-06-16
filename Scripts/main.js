@@ -240,6 +240,16 @@ function controlDisplayMainMinigamesManagement(flag) {
 	// console.log(currMinigame); //DEBUG
 }
 
+function controlMinigames(target) {
+	model.setCurrentIndex(2);
+	// console.log(target); //DEBUG
+	console.log(target.id); //DEBUG
+
+	if (target && target.id) {
+		// window.location.href = `Pages/${target.id}.html`;
+	}
+}
+
 /**
  * @author Gabriele Papa Benigno
  * @description Inizializza tutti i gestori di eventi legati alla pagina principale
@@ -250,4 +260,5 @@ function controlDisplayMainMinigamesManagement(flag) {
 	displaySettings.addHandlerRender(controlDisplaySettings);
 	displayMe.addHandlerRender(controlDisplayMe);
 	displayMain.addHandlerRender(controlDisplayMain);
+	displayMainMinigames.addHandlerRender(controlMinigames);
 })();

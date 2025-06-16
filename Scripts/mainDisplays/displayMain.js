@@ -27,7 +27,7 @@ class displayMain extends Display {
 			// if (!target) target = e.target.closest("#minigames");
 			// else if (!target) return;
 
-			e.preventDefault();
+			// e.preventDefault();
 			// handler(target);
 			handler(e.target);
 		});

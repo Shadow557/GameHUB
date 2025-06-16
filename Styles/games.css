@@ -1,0 +1,49 @@
+/* --- Html base parts --- */
+
+/* --- base HTML elements --- */
+
+/* --- GameHUB base parts --- */
+
+/* --- GameHUB body parts --- */
+
+#ticTacToe {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 1vh;
+	width: max-content;
+	margin: 2vh;
+	/* justify-content: space-around; */
+	align-items: center;
+	background-color: #fff;
+	color: #000;
+	height: 95%;
+	flex: 1;
+	z-index: 1;
+	box-shadow: 0 0 1vh 1vh #fff;
+	border: 1px solid #fff;
+}
+
+/* --- Custom --- */
+
+.cell {
+	margin: 1vh 3vh;
+	border: 3px solid #000;
+	background-color: #aaa;
+	font-size: 2.5em;
+	text-align: center;
+	line-height: 80px; /* Adjust based on your cell height */
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	height: 20vh;
+	width: 20vh;
+}
+
+#menu {
+	border: 1px solid #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* --- Custom Variables--- */

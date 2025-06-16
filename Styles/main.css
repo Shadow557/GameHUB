@@ -193,7 +193,7 @@ img {
 }
 
 .btn {
-	font-size: clamp(1vw, 4vw, 8vw);
+	font-size: clamp(1vw, 2vw, 4vw);
 	color: #000;
 	padding: 1vw;
 	background: #ff0;
@@ -201,10 +201,11 @@ img {
 	border-radius: 50%;
 	cursor: pointer;
 	transition: 1s;
+	text-align: center;
 }
 .btn:hover {
 	color: #777;
-	font-size: clamp(2vw, 5vw, 9vw);
+	font-size: clamp(2vw, 3vw, 5vw);
 	background: #0f0;
 	box-shadow: 0em 0em 0.5em 0.5em #0f0;
 }
@@ -218,12 +219,12 @@ img {
 	right: 8vw;
 }
 .btn#exit {
-	font-size: 3vh;
-	position: absolute;
-	bottom: 10vw;
+	order: 2;
 }
 
 .game {
+	max-width: 20vw;
+	max-height: 20vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -234,13 +235,14 @@ img {
 	background-color: #fff;
 	color: #000;
 	cursor: pointer;
+	order: 1;
 }
 .game h2 {
-	font-size: 6vw;
+	font-size: 2vw;
 }
 .game img {
-	width: 10vw;
-	height: 10vw;
+	width: 8vw;
+	height: 8vw;
 }
 
 /* --- Custom Variables--- */
@@ -252,4 +254,12 @@ img {
 		rgba(0, 0, 0, 1) 60%,
 		rgba(100, 0, 0, 1) 100%
 	);
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10vh;
 }
