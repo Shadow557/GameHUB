@@ -175,17 +175,17 @@ img {
   box-shadow: 0 0 .5em .5em #0f0;
 }
 
-.btn#back {
+#back {
   position: absolute;
   left: 8vw;
 }
 
-.btn#next {
+#next {
   position: absolute;
   right: 8vw;
 }
 
-.btn#exit {
+#exit {
   order: 2;
 }
 
@@ -212,6 +212,25 @@ img {
 .game img {
   width: 8vw;
   height: 8vw;
+}
+
+.title {
+  background: var(--sfumaturaTitolo);
+  -webkit-text-fill-color: transparent;
+  color: #0000;
+  background-clip: text;
+}
+
+.subtitle {
+  background: var(--sfumaturaSottotitolo);
+  -webkit-text-fill-color: transparent;
+  color: #0000;
+  background-clip: text;
+}
+
+.subtitle2 {
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(to top, #000, #fff) text;
 }
 
 :root {

@@ -130,7 +130,7 @@
 
   // Only insert newRequire.load when it is actually used.
   // The code in this file is linted against ES5, so dynamic import is not allowed.
-  function $parcel$resolve(url) {  url = importMap[url] || url;  return import.meta.resolve(distDir + url);}newRequire.resolve = $parcel$resolve;
+  // INSERT_LOAD_HERE
 
   Object.defineProperty(newRequire, 'root', {
     get: function () {
@@ -160,7 +160,7 @@
       });
     }
   }
-})({"g7m11":[function(require,module,exports,__globalThis) {
+})({"loP4O":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -168,7 +168,7 @@ var HMR_SERVER_PORT = 4320;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "a088accbf842e000";
+module.bundle.HMR_BUNDLE_ID = "04df36f56b4697d0";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,259 +666,24 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"5WjR7":[function(require,module,exports,__globalThis) {
+},{}],"faVut":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _modelJs = require("./model.js");
-var _displayAccJs = require("./mainDisplays/displayAcc.js");
-var _displayAccJsDefault = parcelHelpers.interopDefault(_displayAccJs);
-var _displaySettingsJs = require("./mainDisplays/displaySettings.js");
-var _displaySettingsJsDefault = parcelHelpers.interopDefault(_displaySettingsJs);
-var _displayMeJs = require("./mainDisplays/displayMe.js");
-var _displayMeJsDefault = parcelHelpers.interopDefault(_displayMeJs);
-var _displayMainJs = require("./mainDisplays/displayMain.js");
-var _displayMainJsDefault = parcelHelpers.interopDefault(_displayMainJs);
-var _displayMainMinigamesJs = require("./mainDisplays/displayMainMinigames.js");
-var _displayMainMinigamesJsDefault = parcelHelpers.interopDefault(_displayMainMinigamesJs);
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
+var _modelJs = require("../../model.js");
+var _displaySubmenuJs = require("./Displays/displaySubmenu.js");
+var _displaySubmenuJsDefault = parcelHelpers.interopDefault(_displaySubmenuJs);
+function controlDisplaySubmenu() {
+    _modelJs.setCurrentIndex(1);
+    const markup = (0, _displaySubmenuJsDefault.default).render(true);
 }
 /**
- * @author Shadow Shining
- * @description Gestisce il rendering della schermata dell'account:
- * 1. Mostra le informazioni dell'account corrente.
- * 2. Permette di modificare le informazioni dell'account.
- * 3. Gestisce l'uscita dalla schermata dell'account e/o il salvataggio delle nuove informazioni.
- * @returns {void}
- */ function controlDisplayAcc() {
-    // Mostro la schermata dell'account dell'utente o del guest se non è loggato
-    const userData = _modelJs.data.userData;
-    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
-    (0, _displayAccJsDefault.default).render(userData, true);
-    document.querySelector("#accButtons").addEventListener("click", (e)=>{
-        e.preventDefault();
-        // Se l'utente clicca su "Modifica Account", chiamo la funzione per modificare le informazioni dell'account
-        // Altrimenti, esco dalla schermata dell'account
-        if (e.target.id === "editAcc") editAccountInfo();
-        else exitDisplay();
-    });
-}
-/**
- * @author Shadow Shining
- * @description Gestisce la modifica delle informazioni dell'account:
- * 1. Mostra il modulo di modifica delle informazioni dell'account.
- * 2. Permette di salvare le modifiche.
- * 3. Gestisce l'uscita dalla schermata di modifica.
- * @returns {void}
- */ function editAccountInfo() {
-    // console.log(`editAccountInfo() called`); //DEBUG
-    // Mostra il modulo di modifica delle informazioni dell'account
-    (0, _displayAccJsDefault.default).renderFromMarkup((0, _displayAccJsDefault.default)._generateEditableMarkup(), false);
-    // Aggiunge un gestore di eventi per il pulsante di uscita dalla schermata di modifica
-    document.querySelector("#exitAcc").addEventListener("click", (e)=>{
-        e.preventDefault();
-        exitDisplay();
-    });
-    // Aggiunge un gestore di eventi per il pulsante di salvataggio delle informazioni dell'account usando il modulo form come selettore
-    // Questo gestore raccoglie i dati dal modulo e li aggiorna nel modello
-    document.querySelector("#editAccForm").addEventListener("submit", (e)=>{
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const updatedData = {
-            username: formData.get("username"),
-            password: formData.get("password"),
-            email: formData.get("email")
-        };
-        _modelJs.data.userData = {
-            ..._modelJs.data.userData,
-            ...updatedData
-        };
-        (0, _displayAccJsDefault.default).update(_modelJs.data.userData);
-        exitDisplay();
-    });
-}
-/**
- * @author Shadow Shining
- * @description Gestisce l'uscita dalla schermata corrente attiva.
- * @returns {void}
- */ function exitDisplay() {
-    // console.log(`exitAccountInfo() called`);
-    (0, _displayAccJsDefault.default)._parentElement.classList.add("hidden");
-    (0, _displayMainJsDefault.default)._parentElement.classList.remove("hidden");
-    if (!(0, _displayMainJsDefault.default)._parentElement.innerHTML) controlDisplayMain();
-}
-/**
- * @author Shadow Shining
- * @description Gestisce il rendering della schermata delle impostazioni:
- * 1. Mostra le impostazioni correnti.
- * 2. Permette di modificare le impostazioni.
- * 3. Gestisce l'uscita dalla schermata delle impostazioni.
- * @returns {void}
- */ function controlDisplaySettings() {
-    const userSettings = _modelJs.data.settings;
-    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
-    (0, _displaySettingsJsDefault.default).render(userSettings, true);
-    // Aggiunge un gestore di eventi per il pulsante delle impostazioni
-    document.querySelector("#editSettings").addEventListener("click", (e)=>{
-        e.preventDefault();
-        // Mostra il modulo di modifica delle impostazioni
-        (0, _displaySettingsJsDefault.default).renderFromMarkup((0, _displaySettingsJsDefault.default)._generateEditableMarkup(), false);
-        // Aggiunge un gestore di eventi per il pulsante di salvataggio delle impostazioni
-        // Questo gestore raccoglie i dati dal modulo e li aggiorna nel modello
-        // Poi aggiorna la visualizzazione delle impostazioni e chiude la schermata delle impostazioni
-        document.querySelector("#editSettingsForm").addEventListener("submit", (e)=>{
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const updatedData = {
-                titleColor: [
-                    formData.get("titleColor1"),
-                    formData.get("titleColor2")
-                ],
-                subtitleColor: [
-                    formData.get("subtitleColor1"),
-                    formData.get("subtitleColor2")
-                ],
-                backgroundColor: [
-                    formData.get("backgroundColor1"),
-                    formData.get("backgroundColor2")
-                ]
-            };
-            _modelJs.data.settings = {
-                ..._modelJs.data.settings,
-                ...updatedData
-            };
-            (0, _displaySettingsJsDefault.default).changeColors(updatedData);
-            (0, _displaySettingsJsDefault.default).update(_modelJs.data.settings);
-            exitDisplay();
-        });
-        // Aggiunge un gestore di eventi per il pulsante di uscita dalle impostazioni
-        // Questo gestore chiude la schermata delle impostazioni senza applicare le modifiche
-        document.querySelector("#exitSettings").addEventListener("click", (e)=>{
-            e.preventDefault();
-            exitDisplay();
-        });
-    });
-    // Aggiunge un gestore di eventi per il pulsante di uscita dalle impostazioni
-    // Questo gestore chiude la schermata delle impostazioni senza modificare nulla
-    document.querySelector("#exitSettings").addEventListener("click", (e)=>{
-        e.preventDefault();
-        exitDisplay();
-    });
-}
-/**
- * @author Shadow Shining
- * @description Gestisce il rendering della schermata delle informazioni MIE
- * @returns {void}
- */ function controlDisplayMe() {
-    const myData = _modelJs.data;
-    (0, _displayMainJsDefault.default)._parentElement.classList.add("hidden");
-    (0, _displayMainJsDefault.default)._parentElement.innerHTML = "";
-    (0, _displayMeJsDefault.default).render(myData, true);
-    document.querySelector("#exit").addEventListener("click", (e)=>{
-        e.preventDefault();
-        exitDisplay();
-    });
-}
-/**
- * @author Shadow Shining
- * @description Gestisce il rendering della schermata principale
- * @param {event} target
- * @returns {void}
- */ function controlDisplayMain(target) {
-    const myData = _modelJs.data;
-    // console.log(myData.userData.currentPage); //DEBUG
-    // console.log(target); //DEBUG
-    // Se l'utente è già nella pagina principale, non fare nulla
-    if (myData.userData.currentPage !== 0) return;
-    myData.userData.currentPage = 1;
-    // if (target === document.querySelector("#minigames")) {
-    // 	console.log(`minigames`); //DEBUG
-    // 	// controlDisplayMainMinigames("tic-tac-toe", myData);
-    // 	myData.userData.currentPage = 0;
-    // } else {
-    // 	console.log(`games`); //DEBUG
-    // 	myData.userData.currentPage = 0;
-    // }
-    // Gestisce il rendering della schermata principale in base al target cliccato
-    switch(target.id){
-        case "minigames":
-            controlDisplayMainMinigames();
-            break;
-        case "games":
-            console.log(`games`); //DEBUG
-            break;
-        case "back":
-            controlDisplayMainMinigamesManagement(0);
-            break;
-        case "next":
-            controlDisplayMainMinigamesManagement(1);
-            break;
-        case "exit":
-            controlDisplayMainMinigamesManagement();
-            break;
-    }
-    myData.userData.currentPage = 0;
-}
-/**
- * @author Shadow Shining
- * @description Gestisce il rendering della schermata dei minigiochi
- * @returns {void}
- */ function controlDisplayMainMinigames() {
-    // console.log(`---minigames---`); //DEBUG
-    _modelJs.setCurrentIndex(0); //DEBUG
-    const currMinigame = _modelJs.getByCurrentIndex();
-    // console.log(currMinigame); //DEBUG
-    (0, _displayMainMinigamesJsDefault.default).render(currMinigame, true);
-}
-/**
- * @author Shadow Shining
- * @description Gestisce la navigazione tra i minigiochi nella schermata dei minigiochi
- * @param {int} flag - Indica la direzione della navigazione:
- * 0: Torna al minigioco precedente,
- * 1: Vai al minigioco successivo,
- * Altri valori: Esci dalla schermata dei minigiochi e torna alla schermata principale.
- * @returns {void}
- */ function controlDisplayMainMinigamesManagement(flag) {
-    // console.log(`---minigames back---`); //DEBUG
-    if (flag === 0) _modelJs.setCurrentIndex(_modelJs.data.allGames.id.game - 1);
-    else if (flag === 1) _modelJs.setCurrentIndex(_modelJs.data.allGames.id.game + 1);
-    else {
-        _modelJs.setCurrentIndex(0);
-        console.log(`---minigames exit---`); //DEBUG
-        (0, _displayMainJsDefault.default).render(1, true);
-        return;
-    }
-    const currMinigame = _modelJs.getByCurrentIndex();
-    (0, _displayMainMinigamesJsDefault.default).update(currMinigame, true);
-// console.log(currMinigame); //DEBUG
-}
-/**
- * @author Shadow Shining
- * @description Cambia l'indice corrente della pagina (solo per una questione di ordine).
- * @returns {void}
- */ function controlMinigames() {
-    _modelJs.setCurrentIndex(2);
-}
-/**
- * @author Shadow Shining
- * @description Inizializza tutti i gestori di eventi legati alla pagina principale:
- * 1. Gestisce il rendering della schermata dell'account dell'utente.
- * 2. Gestisce il rendering della schermata delle impostazioni.
- * 3. Gestisce il rendering della schermata delle informazioni MIE.
- * 4. Gestisce il rendering della schermata principale.
- * 5. Gestisce il rendering della schermata dei minigiochi.
+ * @author Gabriele Papa Benigno
+ * @description Inizializza tutti i gestori di eventi legati alla pagina principale
  * @returns {void}
  */ (function init() {
-    (0, _displayAccJsDefault.default).addHandlerRender(controlDisplayAcc);
-    (0, _displaySettingsJsDefault.default).addHandlerRender(controlDisplaySettings);
-    (0, _displayMeJsDefault.default).addHandlerRender(controlDisplayMe);
-    (0, _displayMainJsDefault.default).addHandlerRender(controlDisplayMain);
-    (0, _displayMainMinigamesJsDefault.default).addHandlerRender(controlMinigames);
+    (0, _displaySubmenuJsDefault.default).addHandlerRender(controlDisplaySubmenu);
 })();
 
-},{"./model.js":"361Ju","./mainDisplays/displayAcc.js":"fIrGz","./mainDisplays/displaySettings.js":"jLG3B","./mainDisplays/displayMe.js":"jn2qD","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./mainDisplays/displayMain.js":"6xHo6","./mainDisplays/displayMainMinigames.js":"5Uygo"}],"361Ju":[function(require,module,exports,__globalThis) {
+},{"../../model.js":"361Ju","./Displays/displaySubmenu.js":"hkrQE","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"361Ju":[function(require,module,exports,__globalThis) {
 /**
  * @author Shadow Shining
  * @version 1.0.0
@@ -1096,89 +861,44 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"fIrGz":[function(require,module,exports,__globalThis) {
+},{}],"hkrQE":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _displayTempJs = require("./displayTemp.js");
+var _displayTempJs = require("../../../mainDisplays/displayTemp.js");
 var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
-/**
- * @author Gabriele Papa Benigno
- * @description Classe per visualizzare i dati dell'account utente.
- * Estende la classe Display per gestire la visualizzazione e l'editing delle informazioni dell'account.
- * @extends Display
- * @returns {displayACC} - Un'istanza della classe displayACC.
- */ class displayACC extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector(".display");
-    _targetElement = document.querySelector("#header");
-    _errorMessage = "No user data found. Please log in to view your account details.";
+class displaySubmenu extends (0, _displayTempJsDefault.default) {
+    _parentElement = document.querySelector("#gameZone");
+    _errorMessage = "My info are not available. Sorry.";
     /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare i dati dell'account utente.
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
-        return `<div id="accDisplayContent">
-					<h1>User window</h1>
-					<h2>Name: ${this._data.username}</h2>
-					<h2>Password: ${this._data.password}</h2>
-					<h2>Email: ${this._data.email ?? "none"}</h2>
-                    <h2>First login: ${this._data.firstLogin}</h2>
-					<h2>Last game played: ${this._data.lastGame}</h2>
-					<h2>Time spent in total: ${this._data.totalTime}</h2>
-					<h2>Achievements achieved: ${this._data.achievements}</h2>
-					<h2>Total wins: ${this._data.wins}</h2>
-					<h2>Total losses: ${this._data.losses}</h2>
-					<h2>Games played: ${this._data.games}</h2>
-					<h2>W/L rate: ${this._data.wins * this._data.losses / 100}</h2>
-					<div id="accButtons">
-						<button id="editAcc">Edit Account Info</button>
-                    	<button id="exitAcc">Exit Account Info</button>
-					</div>
-				</div>`;
+    * @author Gabriele Papa Benigno
+    * @description Crea il markup per visualizzare le informazioni che MI riguardano.
+    * @returns {String} - Il markup HTML generato.
+    */ _generateMarkup() {
+        return `
+            <div id="submenu">
+               <h1 class="subtitle2">Tic-Tac-Toe</h1>
+               <div class="btn" id="easy">Easy</div>
+               <div class="btn" id="medium">Medium</div>
+               <div class="btn" id="hard">Hard</div>
+            </div>`;
     }
     /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per la modifica delle informazioni dell'account.
-	 * @returns {String} - Il markup HTML generato per la modifica delle informazioni dell'account.
-	 */ _generateEditableMarkup() {
-        return `<div id="accDisplayContent">
-					<form method="post" id="editAccForm">
-
-					<h2><label for="username">Name: </label></h2>
-					<input type="text" id="username" name="username" value="${this._data.username}" required>
-					<br /><br />
-
-					<h2><label for="password">Password: </label></h2>
-					<input type="password" id="password" name="password" value="${this._data.password ?? ""}" required>
-					<br /><br />
-
-					<h2><label for="email">Email: </label></h2>
-					<input type="email" id="email" name="email" value="${this._data.email ?? ""}">
-					<br /><br />
-
-					<button id="saveAcc">Save Account Info</button>
-					</form>
-					
-					<button id="exitAcc">Exit Account Info</button>
-				</div>`;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata dell'account.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        this._targetElement.addEventListener("click", (e)=>{
-            const target = e.target.closest("#accountLogo");
-            if (!target) return;
-            e.preventDefault();
-            handler();
-        // console.log(this);
+    * @author Gabriele Papa Benigno
+    * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
+    * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
+    * @returns {void}
+    */ addHandlerRender(handler) {
+        console.log();
+        this._parentElement.addEventListener("click", (e)=>{
+            // e.preventDefault();
+            console.log(e.target);
+            if (e.target.id === "play") handler(e.target);
         });
     }
 }
-exports.default = new displayACC();
+exports.default = new displaySubmenu();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"4HM4j":[function(require,module,exports,__globalThis) {
+},{"../../../mainDisplays/displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"4HM4j":[function(require,module,exports,__globalThis) {
 /**
  * @author Gabriele Papa Benigno
  * @description Classe base per la visualizzazione dei dati.
@@ -1285,246 +1005,6 @@ class Display {
 }
 exports.default = Display;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"jLG3B":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _displayTempJs = require("./displayTemp.js");
-var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
-/**
- * @author Gabriele Papa Benigno
- * @description Classe per visualizzare le impostazioni della pagina principale.
- * Estende la classe Display per gestire la visualizzazione e l'editing delle impostazioni utente.
- * @extends Display
- * @returns {DisplaySettings} - Un'istanza della classe DisplaySettings.
- */ class DisplaySettings extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector(".display");
-    _targetElement = document.querySelector("#header");
-    _errorMessage = "No user data found. Please log in to view your account details.";
-    4;
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare le impostazioni disponibili per l'utente.
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
-        return `<div id="settingsContent">
-                    <h1>Settings</h1>
-                    <h2>Theme: ${this._data.theme}</h2>
-                    <h2>Title Color:
-                        <span class="coloredBox" style="background:${this._data.titleColor[0]}"></span>
-                        <span class="coloredBox" style="background:${this._data.titleColor[1]}"></span>
-                    </h2>
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}]},["loP4O","faVut"], "faVut", "parcelRequire658c", {})
 
-                    <h2>Subtitle Color:
-                    <span class="coloredBox" style="background:${this._data.subtitleColor[0]}"></span>
-                    <span class="coloredBox" style="background:${this._data.subtitleColor[1]}"></span>
-                    </h2>
-
-                    <h2>Background Color:
-                    <span class="coloredBox" style="background:${this._data.backgroundColor[0]}"></span>
-                    <span class="coloredBox" style="background:${this._data.backgroundColor[1]}"></span>
-                    </h2>
-                    <br />
-
-                    <button id="exitSettings">Exit Settings</button>
-                    <button id="editSettings">Edit Settings</button>
-				</div>`;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per la modifica delle impostazioni dell'utente.
-	 * @returns {String} - Il markup HTML generato per la modifica delle impostazioni.
-	 */ _generateEditableMarkup() {
-        return `<div id="settingsDisplayContent">
-					<form method="post" id="editSettingsForm">
-
-					<h2><label for="titleColor">Title color: </label></h2>
-					<input type="color" id="titleColor1" name="titleColor1" value="${this._data.titleColor[0]}">
-					<input type="color" id="titleColor2" name="titleColor2" value="${this._data.titleColor[1]}">
-					<br /><br />
-
-					<h2><label for="subtitleColor">Subtitle color: </label></h2>
-					<input type="color" id="subtitleColor1" name="subtitleColor1" value="${this._data.subtitleColor[0]}">
-					<input type="color" id="subtitleColor2" name="subtitleColor2" value="${this._data.subtitleColor[1]}">
-					<br /><br />
-
-					<h2><label for="backgroundColor">BackgroundColor: </label></h2>
-					<input type="color" id="backgroundColor1" name="backgroundColor1" value="${this._data.backgroundColor[0]}">
-					<input type="color" id="backgroundColor2" name="backgroundColor2" value="${this._data.backgroundColor[1]}">
-					<br /><br />
-
-					<button id="saveSettings" type="submit">Save settings</button>
-					</form>
-					
-					<button id="exitSettings">Exit settings menu</button>
-				</div>`;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        this._targetElement.addEventListener("click", (e)=>{
-            const target = e.target.closest("#settings");
-            if (!target) return;
-            e.preventDefault();
-            handler();
-        });
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Gestisce l'evento di uscita dalla schermata dell'account.
-	 * Rimuove la classe "hidden" dal parentElement e svuota il suo contenuto.
-	 * @returns {void}
-	 */ changeColors(updatedData) {
-        this._data.titleColor = updatedData.titleColor;
-        this._data.subtitleColor = updatedData.subtitleColor;
-        this._data.backgroundColor = updatedData.backgroundColor;
-        document.documentElement.style.setProperty("--sfumaturaTitolo", `linear-gradient(to top, ${this._data.titleColor[0]}, ${this._data.titleColor[1]})`);
-        document.documentElement.style.setProperty("--sfumaturaSottotitolo", `linear-gradient(to top, ${this._data.subtitleColor[0]}, ${this._data.subtitleColor[1]})`);
-        document.querySelector("#header").style.backgroundColor = this._data.backgroundColor[0];
-        document.querySelector("#footer").style.backgroundColor = this._data.backgroundColor[0];
-        document.querySelector("#body").style.backgroundColor = this._data.backgroundColor[1];
-    }
-}
-exports.default = new DisplaySettings();
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"jn2qD":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _displayTempJs = require("./displayTemp.js");
-var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
-class displayMe extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector(".display");
-    _targetElement = document.querySelector("#header");
-    _errorMessage = "My info are not available. Sorry.";
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
-        return `<div id="myInfoContent">
-                    <h1>My info:</h1>
-					<h2>Name: ${this._data.me.myName}</h2>
-                    <h2>Email: ${this._data.me.myEmail}</h2>
-                    <h2>Main Website: ${this._data.me.myWebsite}</h2>
-                    <h2>Description: ${this._data.me.myDescription}</h2>
-                    <h2><a href="${this._data.me.myGitHub}" target="_blank">My GitHub</a></h2>
-                    <br /><br />
-
-                    <h1>Website info</h1>
-                    <h2>Name: ${this._data.website.name}</h2>
-                    <h2>Description: ${this._data.website.description}</h2>
-                    <h2>Version: ${this._data.website.version}</h2>
-                    <br />
-
-                    <button id="exit">Exit</button>
-				</div>`;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        this._targetElement.addEventListener("click", (e)=>{
-            const target = e.target.closest("#logo");
-            if (!target) return;
-            e.preventDefault();
-            handler();
-        });
-    }
-}
-exports.default = new displayMe();
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","./displayTemp.js":"4HM4j"}],"6xHo6":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _displayTempJs = require("./displayTemp.js");
-var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
-class displayMain extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector("#gameZone");
-    _errorMessage = "My info are not available. Sorry.";
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
-        return `<div id="minigames" class="btn">Play Minigames</div>
-                <div class="btn" id="games">Play Games</div>`;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        console.log();
-        this._parentElement.addEventListener("click", (e)=>{
-            // let target = e.target.closest("#games");
-            // if (!target) target = e.target.closest("#minigames");
-            // else if (!target) return;
-            // e.preventDefault();
-            // handler(target);
-            handler(e.target);
-        });
-    }
-}
-exports.default = new displayMain();
-
-},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"5Uygo":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _displayTempJs = require("./displayTemp.js");
-var _displayTempJsDefault = parcelHelpers.interopDefault(_displayTempJs);
-var _guestPng = require("url:../../Pictures/Guest.png");
-var _guestPngDefault = parcelHelpers.interopDefault(_guestPng);
-class displayMainMinigames extends (0, _displayTempJsDefault.default) {
-    _parentElement = document.querySelector("#gameZone");
-    _errorMessage = "My info are not available. Sorry.";
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
-	 * NON TOCCARE! PORCA TROIA!!
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
-        // DEBUG https://it.wikipedia.org/wiki/Pagina_principale
-        let str = `<div class="btn" id="back">\u{2190}</div>
-			<div class="column">
-				<div class="game" id="${this._data.data.id}">
-				<h2>${this._data.name}</h2>
-				<a href="Pages/tic-tac-toe.html">
-					<img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
-				</a>
-			</div>
-				<div class="btn" id="exit">Back</div>
-			</div>
-			<div class="btn" id="next">\u{2192}</div>
-		</div>`;
-        return str;
-    }
-    /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
-        console.log();
-        this._parentElement.addEventListener("click", (e)=>{
-            // console.log(e);
-            // console.log(e.target);
-            const target = e.target.closest(".game");
-            if (!target) return;
-            // e.preventDefault();
-            handler(target);
-        });
-    }
-}
-exports.default = new displayMainMinigames();
-
-},{"./displayTemp.js":"4HM4j","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","url:../../Pictures/Guest.png":"1I3ec"}],"1I3ec":[function(require,module,exports,__globalThis) {
-module.exports = module.bundle.resolve("Guest.d494ac35.png") + "?" + Date.now();
-
-},{}]},["g7m11","5WjR7"], "5WjR7", "parcelRequire658c", {}, "./", "/")
-
-//# sourceMappingURL=GameHUB.f842e000.js.map
+//# sourceMappingURL=tic-tac-toe.6b4697d0.js.map
