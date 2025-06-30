@@ -940,12 +940,10 @@ const data = {
         firstLogin: "2023-10-01,12:00",
         lastLogin: "2023-10-01,12:00",
         lastGame: null,
-        lastGameData: null,
         totalTime: 0,
         achievements: 0,
         wins: 0,
         losses: 0,
-        games: 0,
         currentPage: 0
     },
     /**
@@ -960,9 +958,9 @@ const data = {
     * @description Dati miei presenti nel sito web
     */ me: {
         myName: "Shadow Shining",
-        myEmail: "craftiaentity@gmail.com",
+        myEmail: "shadowshining432@gmail.com",
         myWebsite: "(maybe in the future)",
-        myDescription: "A dude who doesn't know what to do in life.",
+        myDescription: "A dude who knows what to do in life.",
         myAvatarPath: "../Pictures/ShadowShining.png",
         myGitHub: "https://github.com/Shadow557"
     },
@@ -1001,7 +999,20 @@ const data = {
                 icon: "/Pictures/Guest.png",
                 data: {
                     id: "tic-tac-toe",
-                    description: "A classic game of Tic Tac Toe."
+                    description: "A classic game of Tic Tac Toe.",
+                    difficulty: "normal",
+                    spaces: [
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false,
+                        false
+                    ],
+                    round: 0
                 }
             },
             {
@@ -1483,20 +1494,20 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
     _parentElement = document.querySelector("#gameZone");
     _errorMessage = "My info are not available. Sorry.";
     /**
-	 * @author Gabriele Papa Benigno
-	 * @description Crea il markup per visualizzare le informazioni che MI riguardano.
-	 * NON TOCCARE! PORCA TROIA!!
-	 * @returns {String} - Il markup HTML generato.
-	 */ _generateMarkup() {
+    * @author Gabriele Papa Benigno
+    * @description Crea il markup per visualizzare le informazioni che MI riguardano.
+    * NON TOCCARE! PORCA TROIA!!
+    * @returns {String} - Il markup HTML generato.
+    */ _generateMarkup() {
         // DEBUG https://it.wikipedia.org/wiki/Pagina_principale
         let str = `<div class="btn" id="back">\u{2190}</div>
 			<div class="column">
-				<div class="game" id="${this._data.data.id}">
-				<h2>${this._data.name}</h2>
-				<a href="Pages/tic-tac-toe.html">
-					<img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
-				</a>
-			</div>
+            <a href="Pages/tic-tac-toe.html">
+               <div class="game" id="${this._data.data.id}">
+               <h2>${this._data.name}</h2>
+                  <img src="${(0, _guestPngDefault.default)}" alt="${this._data.name}" />
+               </div>
+            </a>
 				<div class="btn" id="exit">Back</div>
 			</div>
 			<div class="btn" id="next">\u{2192}</div>
@@ -1504,11 +1515,11 @@ class displayMainMinigames extends (0, _displayTempJsDefault.default) {
         return str;
     }
     /**
-	 * @author Gabriele Papa Benigno
-	 * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
-	 * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
-	 * @returns {void}
-	 */ addHandlerRender(handler) {
+    * @author Gabriele Papa Benigno
+    * @description Aggiunge un gestore di eventi per il rendering della schermata delle impostazioni.
+    * @param {Function} handler - La funzione da eseguire quando si verifica un evento di rendering.
+    * @returns {void}
+    */ addHandlerRender(handler) {
         console.log();
         this._parentElement.addEventListener("click", (e)=>{
             // console.log(e);
