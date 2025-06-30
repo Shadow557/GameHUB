@@ -711,7 +711,7 @@ var _displayGameJsDefault = parcelHelpers.interopDefault(_displayGameJs);
         document.querySelectorAll(".cell")[index].textContent = "X";
         emptyCells.splice(emptyCells.indexOf(document.querySelectorAll(".cell")[index]), 1); // Remove the clicked cell from emptyCells
         controlGameAI(index, emptyCells);
-        // controlGameWin(); // Check for win condition after player's move
+        controlGameWin(); // Check for win condition after player's move
         _modelJs.data.allGames.minigames[0].data.round++; // Increment the round
     }
 }
@@ -757,10 +757,10 @@ var _displayGameJsDefault = parcelHelpers.interopDefault(_displayGameJs);
             7
         ].includes(id)) edges.push(id); // Edges
     });
-    console.log("corners"); // DEBUG
-    console.log(corners); // DEBUG
-    console.log("edges"); // DEBUG
-    console.log(edges); // DEBUG
+    // console.log("corners"); // DEBUG
+    // console.log(corners); // DEBUG
+    // console.log("edges"); // DEBUG
+    // console.log(edges); // DEBUG
     switch(difficulty){
         case "easy":
             // If the player clicked on a corner, the AI will play in a random edge cell
@@ -917,13 +917,28 @@ var _displayGameJsDefault = parcelHelpers.interopDefault(_displayGameJs);
         const [a, b, c] = combination;
         if (cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent && cells[a].textContent === "X") {
             alert(`${_modelJs.data.userData.username} wins!`);
-            return;
+            _modelJs.data.allGames.minigames[0].data.round = -1;
+            console.log(document.querySelectorAll(".hidden"));
+            document.querySelectorAll(".hidden").forEach((element)=>{
+                element.classList.remove("hidden");
+            });
         } else if (cells[a].textContent && cells[a].textContent === cells[b].textContent && cells[a].textContent === cells[c].textContent && cells[a].textContent === "O") {
             alert("AI wins!");
-            return;
+            _modelJs.data.allGames.minigames[0].data.round = -1;
+            console.log(document.querySelectorAll(".hidden"));
+            document.querySelectorAll(".hidden").forEach((element)=>{
+                element.classList.remove("hidden");
+            });
         }
     }
-    if (Array.from(cells).every((cell)=>cell.textContent !== "")) alert("It's a draw!");
+    if (Array.from(cells).every((cell)=>cell.textContent !== "")) {
+        alert("It's a draw!");
+        _modelJs.data.allGames.minigames[0].data.round = -1;
+        console.log(document.querySelectorAll(".hidden"));
+        document.querySelectorAll(".hidden").forEach((element)=>{
+            element.classList.remove("hidden");
+        });
+    }
 }
 /**
  * @author Gabriele Papa Benigno
@@ -1283,7 +1298,7 @@ class displayGame extends (0, _displayTempJsDefault.default) {
     */ _generateMarkup() {
         return `
             <div id="row">
-               <a href="tic-tac-toe.html"><div class="btn">\u{2190}</div></a>
+               <a href="tic-tac-toe.html" class="hidden" ><div class="btn">\u{2190}</div></a>
                <div id="ticTacToe">
                   <div class="cell" id="1"></div>
                   <div class="cell" id="2"></div>
@@ -1295,7 +1310,7 @@ class displayGame extends (0, _displayTempJsDefault.default) {
                   <div class="cell" id="8"></div>
                   <div class="cell" id="9"></div>
                </div>
-               <div class="btn" id="again">Again</div>
+               <div class="btn hidden" id="again">Again</div>
             </div>`;
     }
     /**
