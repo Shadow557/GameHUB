@@ -55,7 +55,7 @@ function controlGame(index) {
          1
       ); // Remove the clicked cell from emptyCells
       controlGameAI(index, emptyCells);
-      // controlGameWin(); // Check for win condition after player's move
+      controlGameWin(); // Check for win condition after player's move
       model.data.allGames.minigames[0].data.round++; // Increment the round
    }
 }
@@ -89,10 +89,10 @@ function controlGameAI(indexGiocatore, emptyCells) {
          edges.push(id); // Edges
       }
    });
-   console.log("corners"); // DEBUG
-   console.log(corners); // DEBUG
-   console.log("edges"); // DEBUG
-   console.log(edges); // DEBUG
+   // console.log("corners"); // DEBUG
+   // console.log(corners); // DEBUG
+   // console.log("edges"); // DEBUG
+   // console.log(edges); // DEBUG
 
    switch (difficulty) {
       case "easy":
@@ -262,7 +262,6 @@ function controlGameWin() {
       [0, 4, 8],
       [2, 4, 6],
    ];
-
    for (const combination of winningCombinations) {
       const [a, b, c] = combination;
       if (
@@ -272,7 +271,11 @@ function controlGameWin() {
          cells[a].textContent === "X"
       ) {
          alert(`${model.data.userData.username} wins!`);
-         return;
+         model.data.allGames.minigames[0].data.round = -1;
+         console.log(document.querySelectorAll(".hidden"));
+         document.querySelectorAll(".hidden").forEach((element) => {
+            element.classList.remove("hidden");
+         });
       } else if (
          cells[a].textContent &&
          cells[a].textContent === cells[b].textContent &&
@@ -280,12 +283,21 @@ function controlGameWin() {
          cells[a].textContent === "O"
       ) {
          alert("AI wins!");
-         return;
+         model.data.allGames.minigames[0].data.round = -1;
+         console.log(document.querySelectorAll(".hidden"));
+         document.querySelectorAll(".hidden").forEach((element) => {
+            element.classList.remove("hidden");
+         });
       }
    }
 
    if (Array.from(cells).every((cell) => cell.textContent !== "")) {
       alert("It's a draw!");
+      model.data.allGames.minigames[0].data.round = -1;
+      console.log(document.querySelectorAll(".hidden"));
+      document.querySelectorAll(".hidden").forEach((element) => {
+         element.classList.remove("hidden");
+      });
    }
 }
 

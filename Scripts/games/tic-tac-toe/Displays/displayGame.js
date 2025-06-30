@@ -12,7 +12,7 @@ class displayGame extends Display {
    _generateMarkup() {
       return `
             <div id="row">
-               <a href="tic-tac-toe.html"><div class="btn">←</div></a>
+               <a href="tic-tac-toe.html" class="hidden" ><div class="btn">←</div></a>
                <div id="ticTacToe">
                   <div class="cell" id="1"></div>
                   <div class="cell" id="2"></div>
@@ -24,7 +24,7 @@ class displayGame extends Display {
                   <div class="cell" id="8"></div>
                   <div class="cell" id="9"></div>
                </div>
-               <div class="btn" id="again">Again</div>
+               <div class="btn hidden" id="again">Again</div>
             </div>`;
    }
 
