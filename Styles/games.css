@@ -23,7 +23,8 @@ a {
    grid-template-rows: repeat(3, 1fr);
    gap: 1vh;
    width: max-content;
-   margin: 2vh;
+   margin: 2vh 2vw;
+   padding: 1vh 1vw;
    /* justify-content: space-around; */
    align-items: center;
    background-color: #fff;
@@ -33,6 +34,28 @@ a {
    z-index: 1;
    box-shadow: 0 0 1vh 1vh #fff;
    border: 1px solid #fff;
+   border-radius: 5%;
+   opacity: 0.5;
+}
+
+#back {
+   position: static;
+   /* left: 6vw; */
+   /* margin: auto 2%; */
+   left: 1vw;
+}
+#again {
+   /* margin: auto 2%; */
+   right: 1vw;
+}
+
+#row {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   justify-content: space-around;
+   align-items: center;
+   align-content: normal;
 }
 
 /* --- Custom --- */
@@ -48,6 +71,9 @@ a {
    transition: background-color 0.3s ease;
    height: 20vh;
    width: 20vh;
+}
+.cell:hover {
+   background-color: #555;
 }
 
 #menu {
@@ -68,19 +94,7 @@ a {
 }
 
 .btn {
-   font-size: clamp(
-      calc((2vh + 2vw) / 2),
-      calc((3vh + 3vw) / 2),
-      calc((5vh + 5vw) / 2)
-   );
    margin: 5vh 5vw;
-}
-.btn:hover {
-   font-size: clamp(
-      calc((3.5vh + 3.5vw) / 2),
-      calc((5vh + 5vw) / 2),
-      calc((7vh + 7vw) / 2)
-   );
 }
 
 #easy:hover {

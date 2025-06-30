@@ -29,9 +29,11 @@ class displaySubmenu extends Display {
       console.log();
       this._parentElement.addEventListener("click", (e) => {
          // e.preventDefault();
-         console.log(e.target);
+         // console.log(e.target);
 
-         if (e.target.id === "play") handler(e.target);
+         if (e.target.id === "play") {
+            handler();
+         }
       });
    }
 }

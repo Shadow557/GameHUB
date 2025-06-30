@@ -16,12 +16,10 @@ export const data = {
       firstLogin: "2023-10-01,12:00",
       lastLogin: "2023-10-01,12:00",
       lastGame: null,
-      lastGameData: null,
       totalTime: 0,
       achievements: 0,
       wins: 0,
       losses: 0,
-      games: 0,
       currentPage: 0,
    },
 
@@ -40,9 +38,9 @@ export const data = {
     */
    me: {
       myName: "Shadow Shining",
-      myEmail: "craftiaentity@gmail.com",
+      myEmail: "shadowshining432@gmail.com",
       myWebsite: "(maybe in the future)",
-      myDescription: "A dude who doesn't know what to do in life.",
+      myDescription: "A dude who knows what to do in life.",
       myAvatarPath: "../Pictures/ShadowShining.png",
       myGitHub: "https://github.com/Shadow557",
    },
@@ -74,6 +72,19 @@ export const data = {
             data: {
                id: "tic-tac-toe",
                description: "A classic game of Tic Tac Toe.",
+               difficulty: "normal", // Default difficulty
+               spaces: [
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+                  false,
+               ], // 3x3 grid
+               round: 0, // Current round
             },
          },
          {
